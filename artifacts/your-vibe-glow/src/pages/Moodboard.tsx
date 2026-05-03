@@ -123,7 +123,7 @@ export default function Moodboard() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <p className="board-title-font text-xs uppercase tracking-[0.35em] mb-2" style={{ color: t.subtext }}>
-                Your pintrest board
+                Your Pintrest board
               </p>
               {editingTitle ? (
                 <input

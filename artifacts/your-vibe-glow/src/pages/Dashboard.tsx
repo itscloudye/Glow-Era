@@ -3,12 +3,13 @@ import { Link } from "wouter";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
-import { CalendarCheck, Flame, Sparkles, User, HeartHandshake, Wand2 } from "lucide-react";
+import { CalendarCheck, Flame, Sparkles, User, HeartHandshake, Wand2, CircleHelp } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { QuizModal } from "@/components/QuizModal";
 import { JournalBook } from "@/components/JournalBook";
 import { TrackerMini } from "@/components/TrackerMini";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const VIBE_THEMES: Record<string, {
   bg: string;
@@ -92,6 +93,7 @@ export default function Dashboard() {
   const [nameInput, setNameInput] = useState("");
   const [quizOpen, setQuizOpen] = useState(false);
   const [hasSeenQuizAlert, setHasSeenQuizAlert] = useLocalStorage("hasSeenQuizAlert", false);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   const name = userName || "bestie";
   const handleSaveName = () => {
@@ -123,7 +125,28 @@ export default function Dashboard() {
 
         {/* Header */}
         <header className="mb-8 flex flex-col gap-4">
-          <div className="w-full">
+          <div className="w-full relative">
+            <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  className="absolute right-0 top-0 h-10 w-10 rounded-full flex items-center justify-center transition-all hover:scale-105"
+                  style={{ background: isDark ? "rgba(255,255,255,0.1)" : "rgba(244,168,192,0.22)", color: isDark ? "#F5E6C8" : "#7D2547" }}
+                  aria-label="Help"
+                >
+                  <CircleHelp className="h-5 w-5" />
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md rounded-3xl border-0" style={{ background: isDark ? "#2D0010" : "#fff7fb" }}>
+                <DialogHeader>
+                  <DialogTitle className={isDark ? "text-[#F5E6C8]" : "text-[#7D2547]"}>How to use Glow Era</DialogTitle>
+                  <DialogDescription className={isDark ? "text-[#F0D0DC]" : "text-[#6D1A36]"}>
+                    Use the dashboard to check your glow score, open the quiz, and jump into the tracker, journal, check-in, or your Pinterest board.
+                    The quiz helps find your vibe, and everything saves automatically for you.
+                  </DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
             <h1 className={`text-3xl md:text-4xl font-serif font-bold mb-1 ${isDark ? "text-[#F5E6C8]" : theme.text}`}>
               hey {name}, ready to glow today? ✨
             </h1>

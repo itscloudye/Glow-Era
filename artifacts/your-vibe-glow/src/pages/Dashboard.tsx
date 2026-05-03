@@ -265,10 +265,10 @@ export default function Dashboard() {
                 className="rounded-full bg-primary hover:bg-primary/90 text-white"
                 data-testid="button-start-quiz-prompt"
               >
-                Start Quiz ✨
+                Retake Vibe Quiz ✨
               </Button>
-              <div className="rounded-full px-4 py-2 text-sm font-medium border bg-white/70" style={{ borderColor: isDark ? "rgba(255,255,255,0.18)" : "rgba(244,168,192,0.35)", color: isDark ? "#F5E6C8" : "#7D2547" }}>
-                Utilization Rate: 92%
+              <div className="rounded-full px-4 py-2 text-sm font-semibold border bg-white/80 shadow-sm whitespace-nowrap" style={{ borderColor: isDark ? "rgba(255,255,255,0.18)" : "rgba(244,168,192,0.35)", color: isDark ? "#F5E6C8" : "#7D2547" }}>
+                Goal Completion Rate: 92%
               </div>
             </div>
           </motion.div>

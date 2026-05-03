@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { format } from "date-fns";
@@ -103,6 +103,11 @@ export default function Dashboard() {
   const bgStyle = VIBE_BG_STYLE[vibeResult] ?? VIBE_BG_STYLE[""];
   const isDark = vibeResult === "Dark Feminine";
   const isBalanced = vibeResult === "Balanced Muse";
+
+  useEffect(() => {
+    const timer = setTimeout(() => setQuizOpen(true), 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="min-h-[100dvh] transition-all duration-700" style={bgStyle}>

@@ -4,10 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import { Nav } from "@/components/Nav";
-import { PageTransition } from "@/components/PageTransition";
 
-import Home from "@/pages/Home";
-import Quiz from "@/pages/Quiz";
 import Dashboard from "@/pages/Dashboard";
 import Tracker from "@/pages/Tracker";
 import CheckIn from "@/pages/CheckIn";
@@ -19,9 +16,7 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/quiz" component={Quiz} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/" component={Dashboard} />
       <Route path="/tracker" component={Tracker} />
       <Route path="/checkin" component={CheckIn} />
       <Route path="/journal" component={Journal} />
@@ -36,12 +31,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <div className="min-h-[100dvh] flex flex-col bg-background text-foreground overflow-x-hidden">
+          <div className="min-h-[100dvh] flex flex-col text-foreground overflow-x-hidden">
             <Nav />
             <main className="flex-grow flex flex-col">
-              <PageTransition>
-                <Router />
-              </PageTransition>
+              <Router />
             </main>
           </div>
         </WouterRouter>

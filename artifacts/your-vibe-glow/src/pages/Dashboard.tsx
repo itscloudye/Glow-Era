@@ -1,113 +1,259 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
-import { CalendarCheck, Flame, Sparkles, User, NotebookPen, HeartHandshake } from "lucide-react";
+import { CalendarCheck, Flame, Sparkles, User, NotebookPen, HeartHandshake, Wand2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { QuizModal } from "@/components/QuizModal";
+
+const VIBE_THEMES: Record<string, {
+  bg: string;
+  card: string;
+  accent: string;
+  text: string;
+  subtext: string;
+  suggestionCard: string;
+  border: string;
+}> = {
+  "": {
+    bg: "bg-white",
+    card: "bg-white border border-gray-100 shadow-sm",
+    accent: "bg-gray-50",
+    text: "text-gray-900",
+    subtext: "text-gray-500",
+    suggestionCard: "bg-gray-50 border border-gray-100",
+    border: "border-gray-100",
+  },
+  "Clean Girl": {
+    bg: "",
+    card: "border shadow-sm",
+    accent: "bg-[#F0E4D0]/60",
+    text: "text-[#5C3D1E]",
+    subtext: "text-[#8B6340]",
+    suggestionCard: "bg-[#EDD9BE] border border-[#D4B896]",
+    border: "border-[#D4B896]",
+  },
+  "Dark Feminine": {
+    bg: "",
+    card: "border shadow-sm",
+    accent: "bg-[#5A1030]/10",
+    text: "text-[#2A0616]",
+    subtext: "text-[#7D3055]",
+    suggestionCard: "dark-fem-card",
+    border: "border-[#9B2555]/30",
+  },
+  "Soft Glow": {
+    bg: "",
+    card: "border shadow-sm",
+    accent: "bg-[#FDE8EF]/60",
+    text: "text-[#7D2547]",
+    subtext: "text-[#B05575]",
+    suggestionCard: "soft-girl-card",
+    border: "border-[#F4A8C0]/40",
+  },
+  "Balanced Muse": {
+    bg: "",
+    card: "border shadow-sm",
+    accent: "bg-[#EDE8F5]/60",
+    text: "text-[#4A3570]",
+    subtext: "text-[#7B6AA0]",
+    suggestionCard: "bg-[#E8DFF5] border border-[#C9B8E8]",
+    border: "border-[#C9B8E8]",
+  },
+};
+
+const VIBE_BG_STYLE: Record<string, React.CSSProperties> = {
+  "": { background: "#ffffff" },
+  "Clean Girl": { background: "linear-gradient(150deg, #FDF6EC 0%, #F5EBE0 40%, #EDD9BE 100%)" },
+  "Dark Feminine": { background: "linear-gradient(150deg, #2A0616 0%, #3A0A1E 35%, #5A1030 70%, #9B2555 100%)" },
+  "Soft Glow": { background: "linear-gradient(150deg, #FFF5F8 0%, #FDE8EF 40%, #F8C8D4 100%)" },
+  "Balanced Muse": { background: "linear-gradient(150deg, #F8F5FF 0%, #EDE8F5 40%, #DDD0F0 100%)" },
+};
+
+const SUGGESTIONS: Record<string, string> = {
+  "": "Take the vibe quiz to unlock your personalized glow suggestions ✨",
+  "Clean Girl": "Start your morning with lemon water, a 10-min walk, and your fave podcast. You radiate that effortless glow, bestie.",
+  "Dark Feminine": "Take a moment tonight for a dark red lip and your favorite candle. You're the main character and the story is yours.",
+  "Soft Glow": "Light your vanilla candle, put on your cozy playlist, and romanticize doing your skincare. Angel energy activated.",
+  "Balanced Muse": "Flow between worlds today — be soft when you need rest, be fierce when you need power. You contain multitudes.",
+};
 
 export default function Dashboard() {
-  const [vibeResult] = useLocalStorage("vibeResult", "Balanced Muse");
+  const [vibeResult] = useLocalStorage("vibeResult", "");
   const [streak] = useLocalStorage("streak", 3);
   const [glowLevel] = useLocalStorage("glowLevel", 42);
   const [todayMood] = useLocalStorage("todayMood", "✨");
+  const [quizOpen, setQuizOpen] = useState(false);
 
   const today = format(new Date(), "EEEE, MMMM do");
+  const theme = VIBE_THEMES[vibeResult] ?? VIBE_THEMES[""];
+  const bgStyle = VIBE_BG_STYLE[vibeResult] ?? VIBE_BG_STYLE[""];
+  const isDark = vibeResult === "Dark Feminine";
 
   return (
-    <div className="container mx-auto p-4 md:p-8 max-w-5xl">
-      <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-2">
-          hey bestie, ready to glow today? ✨
-        </h1>
-        <p className="text-muted-foreground font-medium text-lg">{today}</p>
-      </header>
+    <div className="min-h-[100dvh] transition-all duration-700" style={bgStyle}>
+      <div className="container mx-auto p-4 md:p-8 max-w-5xl">
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <motion.div whileHover={{ y: -2 }} className="glass-card p-4 rounded-2xl flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-primary">
-            <Sparkles className="w-5 h-5" />
-            <span className="font-medium">Glow Level</span>
+        {/* Header */}
+        <header className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <h1 className={`text-3xl md:text-4xl font-serif font-bold mb-1 ${isDark ? "text-[#F5E6C8]" : theme.text}`}>
+              hey bestie, ready to glow today? ✨
+            </h1>
+            <p className={`font-medium text-lg ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>{today}</p>
           </div>
-          <div className="text-2xl font-bold">{glowLevel}%</div>
-          <Progress value={glowLevel} className="h-1.5" />
+          <Button
+            onClick={() => setQuizOpen(true)}
+            variant="outline"
+            className={`rounded-full flex items-center gap-2 text-sm font-medium transition-all ${
+              isDark
+                ? "border-[#9B2555]/50 text-[#F5E6C8] hover:bg-[#9B2555]/20"
+                : `${theme.border} ${theme.text} hover:bg-black/5`
+            }`}
+            data-testid="button-open-quiz"
+          >
+            <Wand2 className="w-4 h-4" />
+            {vibeResult ? "Retake Vibe Quiz" : "Discover Your Vibe ✨"}
+          </Button>
+        </header>
+
+        {/* Vibe badge */}
+        {vibeResult && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 ${
+              isDark ? "bg-[#9B2555]/30 text-[#F5E6C8]" : `${theme.accent} ${theme.text}`
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            Your vibe: {vibeResult}
+          </motion.div>
+        )}
+
+        {/* Prompt if no quiz taken */}
+        {!vibeResult && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 p-6 rounded-2xl bg-gradient-to-r from-[#3A0A1E]/5 to-[#F4A8C0]/20 border border-[#F4A8C0]/30 flex flex-col md:flex-row items-center gap-4"
+          >
+            <div className="text-4xl">🌸</div>
+            <div className="flex-1 text-center md:text-left">
+              <p className="font-serif text-xl font-semibold text-foreground">find your glow vibe, bestie</p>
+              <p className="text-muted-foreground text-sm mt-1">Take the 5-question quiz to unlock your personalized aesthetic theme and glow suggestions</p>
+            </div>
+            <Button
+              onClick={() => setQuizOpen(true)}
+              className="rounded-full bg-primary hover:bg-primary/90 text-white shrink-0"
+              data-testid="button-start-quiz-prompt"
+            >
+              Start Quiz ✨
+            </Button>
+          </motion.div>
+        )}
+
+        {/* Summary Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {[
+            {
+              icon: <Sparkles className="w-5 h-5" />,
+              iconColor: isDark ? "text-[#C9A84C]" : "text-primary",
+              label: "Glow Level",
+              value: `${glowLevel}%`,
+              extra: <Progress value={glowLevel} className="h-1.5 mt-1" />,
+            },
+            {
+              icon: <Flame className="w-5 h-5" />,
+              iconColor: "text-orange-400",
+              label: "Daily Streak",
+              value: `${streak} days`,
+              extra: <p className={`text-xs ${isDark ? "text-[#D4A0B5]" : "text-muted-foreground"}`}>keep it up 💕</p>,
+            },
+            {
+              icon: <User className="w-5 h-5" />,
+              iconColor: isDark ? "text-[#F5E6C8]" : "text-secondary-foreground",
+              label: "Vibe Type",
+              value: vibeResult || "—",
+              extra: null,
+            },
+            {
+              icon: <HeartHandshake className="w-5 h-5" />,
+              iconColor: "text-pink-400",
+              label: "Mood Today",
+              value: <span className="text-3xl">{todayMood}</span>,
+              extra: null,
+            },
+          ].map((card, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -2 }}
+              className={`p-4 rounded-2xl flex flex-col gap-2 ${
+                isDark
+                  ? "bg-white/10 border border-white/15 backdrop-blur-sm"
+                  : `${theme.card} ${theme.border}`
+              }`}
+            >
+              <div className={`flex items-center gap-2 ${card.iconColor}`}>
+                {card.icon}
+                <span className={`font-medium text-sm ${isDark ? "text-[#F5E6C8]" : theme.text}`}>{card.label}</span>
+              </div>
+              <div className={`text-2xl font-bold ${isDark ? "text-white" : theme.text}`}>{card.value}</div>
+              {card.extra}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Quick Access */}
+        <h2 className={`text-2xl font-serif font-semibold mb-4 ${isDark ? "text-[#F5E6C8]" : theme.text}`}>
+          Quick Actions
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {[
+            { href: "/tracker", icon: <CalendarCheck className="w-6 h-6" />, label: "Tracker", sub: "Tick off your daily habits", iconBg: isDark ? "bg-[#9B2555]/30 text-[#F5E6C8]" : "bg-primary/10 text-primary" },
+            { href: "/checkin", icon: <span className="text-2xl">✨</span>, label: "Check-In", sub: "Log your mood & thoughts", iconBg: isDark ? "bg-white/10 text-[#F5E6C8]" : "bg-secondary text-secondary-foreground" },
+            { href: "/journal", icon: <NotebookPen className="w-6 h-6" />, label: "Journal", sub: "Write it out, bestie", iconBg: isDark ? "bg-[#C9A84C]/20 text-[#C9A84C]" : "bg-accent/20 text-accent-foreground" },
+          ].map((item) => (
+            <Link key={item.href} href={item.href}>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className={`p-6 rounded-2xl flex items-center gap-4 cursor-pointer transition-all ${
+                  isDark
+                    ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15"
+                    : `bg-card ${theme.border} border hover:border-primary/40`
+                }`}
+                data-testid={`link${item.href.replace("/", "-")}`}
+              >
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${item.iconBg}`}>
+                  {item.icon}
+                </div>
+                <div>
+                  <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>{item.label}</h3>
+                  <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>{item.sub}</p>
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Suggestion */}
+        <motion.div
+          whileHover={{ y: -2 }}
+          className={`p-8 rounded-3xl ${theme.suggestionCard}`}
+        >
+          <h3 className={`text-2xl font-serif font-bold mb-2 ${isDark ? "text-[#F5E6C8]" : theme.text}`}>
+            Today's Glow Suggestion ✨
+          </h3>
+          <p className={`text-lg leading-relaxed ${isDark ? "text-[#F0D0DC] opacity-90" : theme.subtext}`}>
+            {SUGGESTIONS[vibeResult] ?? SUGGESTIONS[""]}
+          </p>
         </motion.div>
 
-        <motion.div whileHover={{ y: -2 }} className="glass-card p-4 rounded-2xl flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-orange-500">
-            <Flame className="w-5 h-5" />
-            <span className="font-medium">Daily Streak</span>
-          </div>
-          <div className="text-2xl font-bold">{streak} days</div>
-          <p className="text-xs text-muted-foreground">keep it up 💕</p>
-        </motion.div>
-
-        <motion.div whileHover={{ y: -2 }} className="glass-card p-4 rounded-2xl flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-secondary-foreground">
-            <User className="w-5 h-5" />
-            <span className="font-medium">Vibe Type</span>
-          </div>
-          <div className="text-xl font-bold">{vibeResult}</div>
-        </motion.div>
-
-        <motion.div whileHover={{ y: -2 }} className="glass-card p-4 rounded-2xl flex flex-col gap-2">
-          <div className="flex items-center gap-2 text-purple-500">
-            <HeartHandshake className="w-5 h-5" />
-            <span className="font-medium">Mood Today</span>
-          </div>
-          <div className="text-3xl">{todayMood}</div>
-        </motion.div>
       </div>
 
-      {/* Quick Access */}
-      <h2 className="text-2xl font-serif font-semibold mb-4">Quick Actions</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <Link href="/tracker">
-          <motion.div whileHover={{ scale: 1.02 }} className="bg-card border p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors">
-            <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-              <CalendarCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg">Tracker</h3>
-              <p className="text-sm text-muted-foreground">Tick off your daily habits</p>
-            </div>
-          </motion.div>
-        </Link>
-
-        <Link href="/checkin">
-          <motion.div whileHover={{ scale: 1.02 }} className="bg-card border p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors">
-            <div className="w-12 h-12 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center text-2xl">
-              ✨
-            </div>
-            <div>
-              <h3 className="font-bold text-lg">Check-In</h3>
-              <p className="text-sm text-muted-foreground">Log your mood & thoughts</p>
-            </div>
-          </motion.div>
-        </Link>
-
-        <Link href="/journal">
-          <motion.div whileHover={{ scale: 1.02 }} className="bg-card border p-6 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-primary/50 transition-colors">
-            <div className="w-12 h-12 rounded-full bg-accent/20 text-accent flex items-center justify-center">
-              <NotebookPen className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg">Journal</h3>
-              <p className="text-sm text-muted-foreground">Write it out, bestie</p>
-            </div>
-          </motion.div>
-        </Link>
-      </div>
-
-      {/* Suggestion Card */}
-      <motion.div whileHover={{ y: -2 }} className={`p-8 rounded-3xl ${vibeResult === 'Dark Feminine' ? 'dark-fem-card' : 'soft-girl-card'}`}>
-        <h3 className="text-2xl font-serif font-bold mb-2">Today's Glow Suggestion ✨</h3>
-        <p className="text-lg opacity-90">
-          {vibeResult === 'Dark Feminine' 
-            ? "Take a moment tonight for a dark red lip and a glass of wine. You're the main character."
-            : "Light your favorite vanilla candle and romanticize doing your skincare routine tonight."}
-        </p>
-      </motion.div>
+      <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
     </div>
   );
 }

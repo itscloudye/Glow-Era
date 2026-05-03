@@ -166,7 +166,8 @@
   }
 
   body {
-    @apply font-serif antialiased bg-background text-foreground;
+    font-family: 'Playfair Display', serif;
+    @apply antialiased bg-background text-foreground;
   }
   input, textarea, select {
     font-family: 'EB Garamond', serif;

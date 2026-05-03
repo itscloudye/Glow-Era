@@ -22,7 +22,7 @@ export function Nav() {
     <header className="sticky top-0 z-50 w-full glass-card">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/dashboard" className="text-xl font-serif font-semibold shimmer-text">
-          Your Vibe Glow ✨
+          Glow Era ✨
         </Link>
 
         {/* Desktop Nav */}

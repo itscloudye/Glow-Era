@@ -103,6 +103,9 @@ export default function Dashboard() {
   const bgStyle = VIBE_BG_STYLE[vibeResult] ?? VIBE_BG_STYLE[""];
   const isDark = vibeResult === "Dark Feminine";
   const isBalanced = vibeResult === "Balanced Muse";
+  const introBg = isDark
+    ? "linear-gradient(135deg, rgba(45,0,16,0.92) 0%, rgba(75,12,34,0.88) 100%)"
+    : "linear-gradient(135deg, rgba(42,10,24,0.88) 0%, rgba(82,20,45,0.82) 100%)";
 
   useEffect(() => {
     const timer = setTimeout(() => setQuizOpen(true), 4000);
@@ -120,6 +123,15 @@ export default function Dashboard() {
               hey {name}, ready to glow today? ✨
             </h1>
             <p className={`font-medium text-lg ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>{today}</p>
+            <div
+              className="mt-4 max-w-2xl rounded-3xl px-5 py-4 backdrop-blur-md"
+              style={{ background: introBg }}
+            >
+              <p className="text-sm md:text-base leading-relaxed text-[#F5E6C8]/90">
+                Glow Era is your little soft space to plan your routines, track your glow-ups, save your favorite Pinterest inspo, and check in with yourself daily.
+                It’s made to help the girlies feel organized, inspired, and a little more confident every day.
+              </p>
+            </div>
           </div>
           <Button
             onClick={() => setQuizOpen(true)}

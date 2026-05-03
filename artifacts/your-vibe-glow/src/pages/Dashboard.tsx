@@ -327,7 +327,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        {/* Moodboard */}
+        {/* Pinterest CTA */}
         <Link href="/moodboard">
           <motion.div
             whileHover={{ scale: 1.02 }}
@@ -339,15 +339,18 @@ export default function Dashboard() {
             <div className="relative shrink-0">
               <div className="w-14 h-18 rounded-2xl overflow-hidden shadow-md border border-white/30 bg-gradient-to-b from-[#F7F1FF] to-[#E3D4F7] flex items-center justify-center">
                 <div className="w-10 h-14 rounded-xl bg-white/70 flex items-center justify-center text-2xl">
-                  📌
+                  📍
                 </div>
               </div>
               <div className="absolute -right-1 top-1 w-3.5 h-3.5 rounded-full bg-[#B89AE8] border border-white/70" />
             </div>
-            <div>
-              <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Moodboard</h3>
-              <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>upload your inspo photos</p>
-              <p className={`text-xs mt-1 opacity-70 ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>pinterest-style board</p>
+            <div className="flex-1">
+              <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Make your own Pinterest</h3>
+              <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>build your inspo board with photos you love</p>
+              <p className={`text-xs mt-1 opacity-70 ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>tap to open your board</p>
+            </div>
+            <div className={`px-4 py-2 rounded-full text-sm font-semibold shrink-0 ${isDark ? "bg-[#9B2555]/30 text-[#F5E6C8]" : "bg-[#F4A8C0]/25 text-[#7D2547]"}`}>
+              Open
             </div>
           </motion.div>
         </Link>

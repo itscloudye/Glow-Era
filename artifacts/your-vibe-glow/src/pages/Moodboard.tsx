@@ -122,7 +122,7 @@ export default function Moodboard() {
         <div className="mb-8 flex flex-col gap-5">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.35em] mb-2" style={{ color: t.subtext }}>
+              <p className="board-title-font text-xs uppercase tracking-[0.35em] mb-2" style={{ color: t.subtext }}>
                 your pintrest board
               </p>
               {editingTitle ? (
@@ -141,12 +141,12 @@ export default function Moodboard() {
                     }
                     if (e.key === "Escape") setEditingTitle(false);
                   }}
-                  className="text-3xl md:text-4xl font-serif font-bold bg-transparent border-b-2 outline-none w-full"
+                  className="board-title-font text-3xl md:text-4xl font-bold bg-transparent border-b-2 outline-none w-full"
                   style={{ color: t.text, borderColor: t.accent }}
                 />
               ) : (
                 <h1
-                  className="text-3xl md:text-4xl font-serif font-bold cursor-pointer hover:opacity-75 transition-opacity"
+                  className="board-title-font text-3xl md:text-4xl font-bold cursor-pointer hover:opacity-75 transition-opacity"
                   style={{ color: t.text }}
                   onClick={() => { setTitleInput(boardTitle); setEditingTitle(true); }}
                   title="Click to rename"

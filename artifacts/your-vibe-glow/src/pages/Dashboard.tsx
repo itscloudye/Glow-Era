@@ -75,12 +75,28 @@ const VIBE_BG_STYLE: Record<string, React.CSSProperties> = {
   "Balanced Muse": { background: "linear-gradient(150deg, #F7F1FF 0%, #EEE5FB 42%, #E3D4F7 100%)" },
 };
 
-const SUGGESTIONS: Record<string, string> = {
-  "": "Take the vibe quiz to unlock your personalized glow suggestions ✨",
-  "Clean Girl": "Start your morning with lemon water, a 10-min walk, and your fave podcast. You radiate that effortless glow, bestie.",
-  "Dark Feminine": "Take a moment tonight for a dark red lip and your favorite candle. You're the main character and the story is yours.",
-  "Soft Glow": "Light your vanilla candle, put on your cozy playlist, and romanticize doing your skincare. Angel energy activated.",
-  "Balanced Muse": "Flow between worlds today — be soft when you need rest, be fierce when you need power. You contain multitudes.",
+const SUGGESTIONS: Record<string, string[]> = {
+  "": ["Take the vibe quiz to unlock your personalized glow suggestions ✨"],
+  "Clean Girl": [
+    "Start your morning with lemon water, a 10-min walk, and your fave podcast. You radiate that effortless glow, bestie.",
+    "Keep your space tidy, your water bottle close, and your playlist soft — clean girl energy is in the details.",
+    "Do your skincare slowly today and let everything feel calm, fresh, and intentional.",
+  ],
+  "Dark Feminine": [
+    "Take a moment tonight for a dark red lip and your favorite candle. You're the main character and the story is yours.",
+    "Put on a bold scent, wear something that makes you feel powerful, and let your presence speak first.",
+    "Write down what you want, then move like it’s already yours — that energy hits different.",
+  ],
+  "Soft Glow": [
+    "Light your vanilla candle, put on your cozy playlist, and romanticize doing your skincare. Angel energy activated.",
+    "Rest a little softer today and let your routine feel like self-care, not pressure.",
+    "Make your room extra cozy, sip something warm, and move through the day gently.",
+  ],
+  "Balanced Muse": [
+    "Flow between worlds today — be soft when you need rest, be fierce when you need power. You contain multitudes.",
+    "Trust your instincts, stay flexible, and let your mood guide your pace without guilt.",
+    "Do one thing for discipline and one thing for joy — that balance is your superpower.",
+  ],
 };
 
 export default function Dashboard() {
@@ -118,6 +134,11 @@ export default function Dashboard() {
     }, 4000);
     return () => clearTimeout(timer);
   }, [hasSeenQuizAlert, setHasSeenQuizAlert]);
+
+  const suggestionIndex = Math.abs(
+    new Date().getDate() + new Date().getMonth() + new Date().getFullYear()
+  ) % ((SUGGESTIONS[vibeResult] ?? SUGGESTIONS[""]).length);
+  const todaySuggestion = (SUGGESTIONS[vibeResult] ?? SUGGESTIONS[""])[suggestionIndex] ?? SUGGESTIONS[""][0];
 
   return (
     <div className="min-h-[100dvh] transition-all duration-700" style={bgStyle}>
@@ -400,7 +421,7 @@ export default function Dashboard() {
             Today's Glow Suggestion ✨
           </h3>
           <p className={`text-lg leading-relaxed ${isDark ? "text-[#F0D0DC] opacity-90" : theme.subtext}`}>
-            {SUGGESTIONS[vibeResult] ?? SUGGESTIONS[""]}
+            {todaySuggestion}
           </p>
         </motion.div>
 

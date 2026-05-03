@@ -131,7 +131,7 @@ export default function Dashboard() {
             <div className="mt-4 w-full rounded-3xl backdrop-blur-md" style={{ background: introBg }}>
               <p className="w-full px-5 py-4 text-sm md:text-base leading-7 text-[#F5E6C8]/95 font-medium tracking-wide">
                 Are you having a problem with discipline ?
-                
+                <br />
                 to plan your routines, track your glow-ups,
                 save your favorite Pinterest inspo,
                 and check in with yourself daily.

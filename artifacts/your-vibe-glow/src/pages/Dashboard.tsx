@@ -119,6 +119,7 @@ export default function Dashboard() {
       localStorage.removeItem("todayMood");
       localStorage.removeItem("journal_cover");
       localStorage.removeItem("userName");
+      localStorage.removeItem("hasSeenQuizAlert");
     }
   }, []);
 
@@ -146,13 +147,13 @@ export default function Dashboard() {
     : "linear-gradient(135deg, rgba(42,10,24,0.88) 0%, rgba(82,20,45,0.82) 100%)";
 
   useEffect(() => {
-    if (hasSeenQuizAlert) return;
+    if (vibeResult || hasSeenQuizAlert) return;
     const timer = setTimeout(() => {
       setQuizOpen(true);
       setHasSeenQuizAlert(true);
     }, 7000);
     return () => clearTimeout(timer);
-  }, [hasSeenQuizAlert, setHasSeenQuizAlert]);
+  }, [hasSeenQuizAlert, setHasSeenQuizAlert, vibeResult]);
 
   const suggestionIndex = Math.abs(
     new Date().getDate() + new Date().getMonth() + new Date().getFullYear()

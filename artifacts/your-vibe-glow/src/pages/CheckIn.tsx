@@ -9,9 +9,11 @@ const MOODS = ["😴", "🙂", "😊", "🥰", "💫", "😤", "😔"];
 
 export default function CheckIn() {
   const [mood, setMood] = useLocalStorage("todayMood", "");
+  const [userName] = useLocalStorage("userName", "");
   const [q1, setQ1] = useState("");
   const [q2, setQ2] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const name = userName || "bestie";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ export default function CheckIn() {
             className="glass-card p-8 rounded-3xl text-center space-y-6"
           >
             <div className="text-6xl">💖</div>
-            <h2 className="text-3xl font-serif font-bold">proud of you bestie 💕</h2>
+            <h2 className="text-3xl font-serif font-bold">proud of you, {name} 💕</h2>
             <p className="text-xl text-muted-foreground">you showed up today and that's everything.</p>
             <Button variant="outline" className="mt-4 rounded-full" onClick={() => setSubmitted(false)}>
               log another entry

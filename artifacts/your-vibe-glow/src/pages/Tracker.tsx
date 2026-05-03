@@ -86,7 +86,7 @@ export default function Tracker() {
             Glow Up Tracker ✨
           </h1>
           <p className="text-muted-foreground font-medium text-lg">
-            Small steps every day, bestie 💕
+            Small steps every day 💕
           </p>
         </div>
         <div className="flex items-center gap-4 bg-card px-6 py-4 rounded-2xl border">

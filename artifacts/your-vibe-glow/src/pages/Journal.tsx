@@ -107,7 +107,7 @@ export default function Journal() {
             <h3 className="font-serif font-bold text-xl mb-4">Previous Entries</h3>
             <div className="space-y-3">
               {entries.length === 0 ? (
-                <p className="text-sm text-muted-foreground">No entries yet, start writing bestie! ✨</p>
+                <p className="text-sm text-muted-foreground">No entries yet, start writing! ✨</p>
               ) : (
                 entries.map((entry) => (
                   <div key={entry.id} className="text-sm p-3 bg-background rounded-xl border">

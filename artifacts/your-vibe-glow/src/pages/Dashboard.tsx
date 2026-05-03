@@ -87,7 +87,15 @@ export default function Dashboard() {
   const [glowLevel] = useLocalStorage("glowLevel", 42);
   const [todayMood] = useLocalStorage("todayMood", "✨");
   const [journalCover] = useLocalStorage("journal_cover", "burgundy");
+  const [userName, setUserName] = useLocalStorage("userName", "");
+  const [nameInput, setNameInput] = useState("");
   const [quizOpen, setQuizOpen] = useState(false);
+
+  const name = userName || "bestie";
+  const handleSaveName = () => {
+    const trimmed = nameInput.trim();
+    if (trimmed) setUserName(trimmed);
+  };
 
   const today = format(new Date(), "EEEE, MMMM do");
   const theme = VIBE_THEMES[vibeResult] ?? VIBE_THEMES[""];
@@ -102,7 +110,7 @@ export default function Dashboard() {
         <header className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
             <h1 className={`text-3xl md:text-4xl font-serif font-bold mb-1 ${isDark ? "text-[#F5E6C8]" : theme.text}`}>
-              hey bestie, ready to glow today? ✨
+              hey {name}, ready to glow today? ✨
             </h1>
             <p className={`font-medium text-lg ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>{today}</p>
           </div>
@@ -135,6 +143,42 @@ export default function Dashboard() {
           </motion.div>
         )}
 
+        {/* Name prompt — shown if no name set yet */}
+        {!userName && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 p-5 rounded-2xl flex flex-col sm:flex-row items-center gap-4"
+            style={{ background: "rgba(155,37,85,0.06)", border: "1px solid rgba(244,168,192,0.35)" }}
+          >
+            <div className="text-3xl shrink-0">🌸</div>
+            <div className="flex-1 text-center sm:text-left">
+              <p className="font-serif text-lg font-semibold text-foreground">what should we call you?</p>
+              <p className="text-muted-foreground text-sm">so we can make this feel a little more personal ✨</p>
+            </div>
+            <div className="flex gap-2 w-full sm:w-auto">
+              <input
+                type="text"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSaveName()}
+                placeholder="your name..."
+                maxLength={24}
+                className="rounded-full px-4 py-2 text-sm border border-border bg-white/80 focus:outline-none focus:ring-2 focus:ring-primary/40 w-full sm:w-36"
+                data-testid="input-user-name"
+              />
+              <Button
+                onClick={handleSaveName}
+                size="sm"
+                className="rounded-full bg-primary hover:bg-primary/90 text-white shrink-0"
+                data-testid="button-save-name"
+              >
+                Save
+              </Button>
+            </div>
+          </motion.div>
+        )}
+
         {/* Prompt if no quiz taken */}
         {!vibeResult && (
           <motion.div
@@ -144,7 +188,7 @@ export default function Dashboard() {
           >
             <div className="text-4xl">🌸</div>
             <div className="flex-1 text-center md:text-left">
-              <p className="font-serif text-xl font-semibold text-foreground">find your glow vibe, bestie</p>
+              <p className="font-serif text-xl font-semibold text-foreground">find your glow vibe, {name} ✨</p>
               <p className="text-muted-foreground text-sm mt-1">Take the 5-question quiz to unlock your personalized aesthetic theme and glow suggestions</p>
             </div>
             <Button

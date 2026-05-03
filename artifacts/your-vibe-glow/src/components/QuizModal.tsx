@@ -71,6 +71,8 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState("");
   const [, setVibeResult] = useLocalStorage("vibeResult", "");
+  const [userName] = useLocalStorage("userName", "");
+  const name = userName || "bestie";
 
   const reset = () => {
     setStep(0);
@@ -184,7 +186,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
                   You are: <span className="shimmer-text">{result}</span>
                 </h2>
                 <p className="text-muted-foreground text-base leading-relaxed">{VIBE_RESULTS[result]?.desc}</p>
-                <p className="text-primary font-semibold text-sm">proud of you bestie 💕 step into your glow era ✨</p>
+                <p className="text-primary font-semibold text-sm">proud of you 💕 step into your glow era ✨</p>
                 <Button
                   size="lg"
                   className="w-full bg-primary hover:bg-primary/90 text-white rounded-full text-base mt-2"

@@ -117,14 +117,14 @@ export default function Dashboard() {
       <div className="container mx-auto p-4 md:p-8 max-w-5xl">
 
         {/* Header */}
-        <header className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div>
+        <header className="mb-8 flex flex-col gap-4">
+          <div className="w-full">
             <h1 className={`text-3xl md:text-4xl font-serif font-bold mb-1 ${isDark ? "text-[#F5E6C8]" : theme.text}`}>
               hey {name}, ready to glow today? ✨
             </h1>
             <p className={`font-medium text-lg ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>{today}</p>
             <div
-              className="mt-4 max-w-2xl rounded-3xl px-5 py-4 backdrop-blur-md"
+              className="mt-4 w-full rounded-3xl px-5 py-4 backdrop-blur-md"
               style={{ background: introBg }}
             >
               <p className="text-sm md:text-base leading-relaxed text-[#F5E6C8]/90">

@@ -125,10 +125,20 @@ export default function Dashboard() {
 
   useEffect(() => {
     const handleVibeUpdate = () => {
-      window.location.reload();
+      setQuizOpen(false);
     };
     window.addEventListener("glow-vibe-updated", handleVibeUpdate);
     return () => window.removeEventListener("glow-vibe-updated", handleVibeUpdate);
+  }, []);
+
+  useEffect(() => {
+    const handleStorageUpdate = (event: StorageEvent) => {
+      if (event.key === "vibeResult") {
+        setQuizOpen(false);
+      }
+    };
+    window.addEventListener("storage", handleStorageUpdate);
+    return () => window.removeEventListener("storage", handleStorageUpdate);
   }, []);
 
   const name = userName || "bestie";

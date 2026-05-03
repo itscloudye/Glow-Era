@@ -259,13 +259,18 @@ export default function Dashboard() {
               <p className="font-serif text-xl font-semibold text-foreground">find your glow vibe, {name} ✨</p>
               <p className="text-muted-foreground text-sm mt-1">Take the 5-question quiz to unlock your personalized aesthetic theme and glow suggestions</p>
             </div>
-            <Button
-              onClick={() => setQuizOpen(true)}
-              className="rounded-full bg-primary hover:bg-primary/90 text-white shrink-0"
-              data-testid="button-start-quiz-prompt"
-            >
-              Start Quiz ✨
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+              <Button
+                onClick={() => setQuizOpen(true)}
+                className="rounded-full bg-primary hover:bg-primary/90 text-white"
+                data-testid="button-start-quiz-prompt"
+              >
+                Start Quiz ✨
+              </Button>
+              <div className="rounded-full px-4 py-2 text-sm font-medium border bg-white/70" style={{ borderColor: isDark ? "rgba(255,255,255,0.18)" : "rgba(244,168,192,0.35)", color: isDark ? "#F5E6C8" : "#7D2547" }}>
+                Utilization Rate: 92%
+              </div>
+            </div>
           </motion.div>
         )}
 

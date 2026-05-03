@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { QuizModal } from "@/components/QuizModal";
 import { JournalBook } from "@/components/JournalBook";
+import { TrackerMini } from "@/components/TrackerMini";
 
 const VIBE_THEMES: Record<string, {
   bg: string;
@@ -261,17 +262,18 @@ export default function Dashboard() {
           <Link href="/tracker">
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className={`p-6 rounded-2xl flex items-center gap-4 cursor-pointer transition-all ${
+              className={`p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
                 isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15" : `bg-card ${theme.border} border hover:border-primary/40`
               }`}
               data-testid="link-tracker"
             >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${isDark ? "bg-[#9B2555]/30 text-[#F5E6C8]" : "bg-primary/10 text-primary"}`}>
-                <CalendarCheck className="w-6 h-6" />
-              </div>
+              <motion.div whileHover={{ rotateY: -8, scale: 1.05 }} transition={{ type: "spring", stiffness: 260, damping: 20 }}>
+                <TrackerMini accentColor={isDark ? "#D4A0B5" : "#9B2555"} />
+              </motion.div>
               <div>
                 <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Tracker</h3>
                 <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>Tick off your daily habits</p>
+                <p className={`text-xs mt-1 opacity-70 ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>today's progress</p>
               </div>
             </motion.div>
           </Link>

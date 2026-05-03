@@ -101,6 +101,7 @@ export function Footer() {
                 { href: "/tracker", label: "Glow Up Tracker" },
                 { href: "/checkin", label: "Daily Check-In" },
                 { href: "/journal", label: "My Journal" },
+                { href: "/account", label: "Account" },
                 { href: "/suggestions", label: "Suggestions" },
               ].map((l) => (
                 <li key={l.href}>

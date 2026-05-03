@@ -123,6 +123,14 @@ export default function Dashboard() {
     }
   }, []);
 
+  useEffect(() => {
+    const handleVibeUpdate = () => {
+      window.location.reload();
+    };
+    window.addEventListener("glow-vibe-updated", handleVibeUpdate);
+    return () => window.removeEventListener("glow-vibe-updated", handleVibeUpdate);
+  }, []);
+
   const name = userName || "bestie";
   const handleSaveName = () => {
     const trimmed = nameInput.trim();

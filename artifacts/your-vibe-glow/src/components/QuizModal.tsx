@@ -104,7 +104,10 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
       const finalResult = Object.keys(counts).reduce((a, b) => (counts[a] > counts[b] ? a : b));
       setVibeResult(finalResult);
       setResult(finalResult);
-      setTimeout(() => setShowResult(true), 280);
+      window.dispatchEvent(new Event("glow-vibe-updated"));
+      setTimeout(() => {
+        setShowResult(true);
+      }, 280);
     }
   };
 

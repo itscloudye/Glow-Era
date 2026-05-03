@@ -284,17 +284,23 @@ export default function Dashboard() {
           <Link href="/checkin">
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className={`p-6 rounded-2xl flex items-center gap-4 cursor-pointer transition-all ${
+              className={`p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
                 isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15" : `bg-card ${theme.border} border hover:border-primary/40`
               }`}
               data-testid="link-checkin"
             >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl ${isDark ? "bg-white/10" : "bg-secondary"}`}>
-                ✨
+              <div className="relative shrink-0">
+                <div className="w-14 h-18 rounded-2xl overflow-hidden shadow-md border border-white/30 bg-gradient-to-b from-[#FDE8EF] to-[#F8C8D4] flex items-center justify-center">
+                  <div className="w-10 h-14 rounded-xl bg-white/70 flex items-center justify-center text-2xl">
+                    ✨
+                  </div>
+                </div>
+                <div className="absolute -right-1 top-1 w-3.5 h-3.5 rounded-full bg-[#C9A84C] border border-white/70" />
               </div>
               <div>
                 <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Check-In</h3>
                 <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>Log your mood & thoughts</p>
+                <p className={`text-xs mt-1 opacity-70 ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>mini photo card</p>
               </div>
             </motion.div>
           </Link>

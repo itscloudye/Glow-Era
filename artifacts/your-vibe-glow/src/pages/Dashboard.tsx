@@ -203,7 +203,7 @@ export default function Dashboard() {
         )}
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-4 mb-8 max-w-sm">
           {[
             {
               icon: <Sparkles className="w-5 h-5" />,
@@ -243,7 +243,7 @@ export default function Dashboard() {
                 isDark
                   ? "bg-white/10 border border-white/15 backdrop-blur-sm"
                   : `${theme.card} ${theme.border}`
-              } star-badge-card`}
+              } star-badge-card star-badge-card-${i}`}
             >
               <div className="absolute inset-0 pointer-events-none star-badge-shimmer" />
               <div className="absolute -top-2 -right-2 text-[#C9A84C] opacity-50 text-xl animate-float-slow">✦</div>

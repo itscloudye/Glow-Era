@@ -63,7 +63,7 @@ const DEFAULT_HABITS: Record<string, Habit[]> = {
     { id: "c1", name: "Sketch or journal", completed: false },
     { id: "c2", name: "Watch inspo content", completed: false },
     { id: "c3", name: "Practice a skill", completed: false },
-    { id: "c4", name: "Mood board update", completed: false },
+    { id: "c4", name: "ypur pintrest board update", completed: false },
   ],
   Spiritual: [
     { id: "sp1", name: "Morning prayer", completed: false },

@@ -345,7 +345,7 @@ export default function Dashboard() {
               <div className="absolute -right-1 top-1 w-3.5 h-3.5 rounded-full bg-[#B89AE8] border border-white/70" />
             </div>
             <div className="flex-1">
-              <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Make your own Pinterest</h3>
+              <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>ypur pintrest board</h3>
               <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>build your inspo board with photos you love</p>
               <p className={`text-xs mt-1 opacity-70 ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>tap to open your board</p>
             </div>

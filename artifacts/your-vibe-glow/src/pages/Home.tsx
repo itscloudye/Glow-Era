@@ -54,11 +54,8 @@ export default function Home() {
 
   return (
     <div className="relative w-full h-full min-h-[100dvh] flex flex-col md:flex-row overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 flex flex-col md:flex-row z-0">
-        <div className="w-full md:w-1/2 h-1/2 md:h-full dark-fem-card" />
-        <div className="w-full md:w-1/2 h-1/2 md:h-full soft-girl-card" />
-      </div>
+      {/* Background — unified burgundy-to-pink gradient */}
+      <div className="absolute inset-0 z-0 combined-bg" />
 
       {/* Real SVG Sparkles */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">

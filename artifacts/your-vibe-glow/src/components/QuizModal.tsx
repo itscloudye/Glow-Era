@@ -70,6 +70,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
   const [answers, setAnswers] = useState<string[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState("");
+  const [showIntro, setShowIntro] = useState(true);
   const [, setVibeResult] = useLocalStorage("vibeResult", "");
   const [userName] = useLocalStorage("userName", "");
   const name = userName || "bestie";
@@ -79,11 +80,16 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
     setAnswers([]);
     setShowResult(false);
     setResult("");
+    setShowIntro(true);
   };
 
   const handleClose = () => {
     reset();
     onClose();
+  };
+
+  const startQuiz = () => {
+    setShowIntro(false);
   };
 
   const handleOptionClick = (vibe: string) => {
@@ -135,6 +141,29 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
             </button>
 
             {!showResult ? (
+              showIntro ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col gap-5 text-center py-2"
+                >
+                  <div className="text-5xl">✨</div>
+                  <div className="flex flex-col gap-2">
+                    <h2 className="text-3xl font-serif font-bold text-foreground">welcome to your glow quiz</h2>
+                    <p className="text-muted-foreground text-base leading-relaxed">
+                      this page helps you discover your vibe and get personalized glow ideas based on your style
+                    </p>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full bg-primary hover:bg-primary/90 text-white rounded-full text-base mt-2"
+                    onClick={startQuiz}
+                    data-testid="button-start-quiz-intro"
+                  >
+                    start quiz →
+                  </Button>
+                </motion.div>
+              ) : (
               <>
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-between text-sm text-muted-foreground font-medium">
@@ -175,6 +204,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
                   </motion.div>
                 </AnimatePresence>
               </>
+              )
             ) : (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}

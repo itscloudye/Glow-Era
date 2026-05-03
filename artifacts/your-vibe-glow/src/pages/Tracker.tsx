@@ -18,40 +18,34 @@ type CategoryConfig = {
 };
 
 const CATEGORY_CONFIG: Record<string, CategoryConfig> = {
-  Hair: {
-    emoji: "💇‍♀️",
-    tip: "Deep conditioning once a week keeps your strands silky and strong — try leaving it on for 30 mins under a shower cap!",
-  },
-  Skin: {
-    emoji: "🧴",
-    tip: "Never skip SPF — even on cloudy days. It's the #1 anti-aging secret your future self will thank you for.",
+  Spiritual: {
+    emoji: "🕊️",
+    tip: "Starting your morning with 5 minutes of quiet gratitude shifts your entire day's energy.",
   },
   Health: {
     emoji: "🧘‍♀️",
     tip: "Even 10 minutes of movement counts. A walk, stretching, dancing in your room — your body loves it all.",
   },
+  Skin: {
+    emoji: "🧴",
+    tip: "Never skip SPF — even on cloudy days. It's the #1 anti-aging secret your future self will thank you for.",
+  },
+  Hair: {
+    emoji: "💇‍♀️",
+    tip: "Deep conditioning once a week keeps your strands silky and strong — try leaving it on for 30 mins under a shower cap!",
+  },
   Creativity: {
     emoji: "🎨",
     tip: "Creativity feeds the soul. Even 5 minutes of doodling in a notebook can spark something beautiful.",
   },
-  Spiritual: {
-    emoji: "🕊️",
-    tip: "Starting your morning with 5 minutes of quiet gratitude shifts your entire day's energy.",
-  },
 };
 
 const DEFAULT_HABITS: Record<string, Habit[]> = {
-  Hair: [
-    { id: "h1", name: "Deep condition", completed: false },
-    { id: "h2", name: "Silk wrap at night", completed: false },
-    { id: "h3", name: "Scalp massage", completed: false },
-    { id: "h4", name: "No heat day", completed: false },
-  ],
-  Skin: [
-    { id: "s1", name: "Double cleanse", completed: false },
-    { id: "s2", name: "SPF application", completed: false },
-    { id: "s3", name: "Sheet mask", completed: false },
-    { id: "s4", name: "Stay hydrated", completed: false },
+  Spiritual: [
+    { id: "sp1", name: "Morning prayer", completed: false },
+    { id: "sp2", name: "Gratitude reflection", completed: false },
+    { id: "sp3", name: "Quiet time", completed: false },
+    { id: "sp4", name: "Affirmations", completed: false },
   ],
   Health: [
     { id: "he1", name: "8 glasses water", completed: false },
@@ -59,17 +53,23 @@ const DEFAULT_HABITS: Record<string, Habit[]> = {
     { id: "he3", name: "8 hours sleep", completed: false },
     { id: "he4", name: "5 min meditation", completed: false },
   ],
+  Skin: [
+    { id: "s1", name: "Double cleanse", completed: false },
+    { id: "s2", name: "SPF application", completed: false },
+    { id: "s3", name: "Sheet mask", completed: false },
+    { id: "s4", name: "Stay hydrated", completed: false },
+  ],
+  Hair: [
+    { id: "h1", name: "Deep condition", completed: false },
+    { id: "h2", name: "Silk wrap at night", completed: false },
+    { id: "h3", name: "Scalp massage", completed: false },
+    { id: "h4", name: "No heat day", completed: false },
+  ],
   Creativity: [
     { id: "c1", name: "Sketch or journal", completed: false },
     { id: "c2", name: "Watch inspo content", completed: false },
     { id: "c3", name: "Practice a skill", completed: false },
     { id: "c4", name: "ypur pintrest board update", completed: false },
-  ],
-  Spiritual: [
-    { id: "sp1", name: "Morning prayer", completed: false },
-    { id: "sp2", name: "Gratitude reflection", completed: false },
-    { id: "sp3", name: "Quiet time", completed: false },
-    { id: "sp4", name: "Affirmations", completed: false },
   ],
 };
 

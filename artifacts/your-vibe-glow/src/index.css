@@ -167,10 +167,13 @@
 
   body {
     font-family: 'Playfair Display', serif;
-    @apply antialiased bg-background text-foreground;
+    @apply antialiased bg-background text-foreground leading-relaxed;
   }
   input, textarea, select {
     font-family: 'EB Garamond', serif;
+  }
+  input, textarea, select {
+    border-radius: 1rem;
   }
   .board-title-font {
     font-family: 'Playfair Display', serif;
@@ -198,3 +201,4 @@
 @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
 .animate-float { animation: float 3s ease-in-out infinite; }
 .shimmer-text { background: linear-gradient(90deg, #C9A84C, #F4A8C0, #9B2555, #F4A8C0, #C9A84C); background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite; }
+.footer-glow { animation: shimmer 5s linear infinite; background: linear-gradient(90deg, #C9A84C, #F4A8C0, #9B2555, #F4A8C0, #C9A84C); background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }

@@ -443,7 +443,7 @@ export default function Dashboard() {
 
       </div>
 
-      <div className="pb-10 text-center text-xs tracking-[0.35em] uppercase" style={{ color: isDark ? "#D4A0B5" : "#7D2547" }}>
+      <div className="pb-10 text-center text-xs tracking-[0.35em] uppercase footer-glow">
         1% Better Every Day
       </div>
 

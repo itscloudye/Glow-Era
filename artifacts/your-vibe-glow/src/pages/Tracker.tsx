@@ -214,6 +214,7 @@ function HeartCard({
                 onClick={() => onRemove(habit.id)}
                 className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-full"
                 style={{ color: subtext }}
+                aria-label={`Delete goal ${habit.name}`}
               >
                 <X size={14} />
               </button>

@@ -11,6 +11,7 @@ import Tracker from "@/pages/Tracker";
 import CheckIn from "@/pages/CheckIn";
 import Journal from "@/pages/Journal";
 import Suggestions from "@/pages/Suggestions";
+import Moodboard from "@/pages/Moodboard";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/checkin" component={CheckIn} />
       <Route path="/journal" component={Journal} />
       <Route path="/suggestions" component={Suggestions} />
+      <Route path="/moodboard" component={Moodboard} />
       <Route component={NotFound} />
     </Switch>
   );

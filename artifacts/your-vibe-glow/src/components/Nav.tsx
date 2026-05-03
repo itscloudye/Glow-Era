@@ -24,7 +24,6 @@ export function Nav() {
     { href: "/tracker", label: "Tracker" },
     { href: "/checkin", label: "Check-In" },
     { href: "/journal", label: "Journal" },
-    { href: "/account", label: "Account" },
     { href: "/moodboard", label: "Your pintrest board" },
     { href: "/suggestions", label: "Suggestions" },
   ];

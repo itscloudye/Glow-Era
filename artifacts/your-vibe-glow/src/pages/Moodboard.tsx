@@ -19,13 +19,6 @@ const COMPLIMENTS = [
   "that's giving everything 🔥",
 ];
 
-const STARTER_PHOTOS = [
-  { src: "/moodboard-starter-1.jpg", compliment: "gorgeous ✨", caption: "pink accessories" },
-  { src: "/moodboard-starter-2.jpg", compliment: "obsessed with this 😍", caption: "skincare shelf" },
-  { src: "/moodboard-starter-3.jpg", compliment: "queen behavior 👑", caption: "soft florals" },
-  { src: "/moodboard-starter-4.jpg", compliment: "pure aesthetic 🌸", caption: "dreamy room" },
-];
-
 type Photo = {
   id: string;
   src: string;
@@ -39,12 +32,7 @@ type ToastCompliment = {
 };
 
 export default function Moodboard() {
-  const [photos, setPhotos] = useLocalStorage<Photo[]>("moodboard_photos", STARTER_PHOTOS.map((photo, index) => ({
-    id: `starter_${index}`,
-    src: photo.src,
-    compliment: photo.compliment,
-    caption: photo.caption,
-  })));
+  const [photos, setPhotos] = useLocalStorage<Photo[]>("moodboard_photos", []);
   const [boardTitle, setBoardTitle] = useLocalStorage("moodboard_title", "Your Pinterest Board");
   const [editingTitle, setEditingTitle] = useState(false);
   const [titleInput, setTitleInput] = useState("");

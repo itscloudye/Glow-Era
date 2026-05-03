@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useVibeTheme } from "@/hooks/useVibeTheme";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
+import { X } from "lucide-react";
 
 const PROMPTS = [
   "what made you feel pretty today?",
@@ -21,6 +22,36 @@ export const COVER_OPTIONS = [
   { id: "light-pink", label: "Light Pink", bg: "#F8C8D4", spine: "#E8809F", text: "#6D1A36" },
 ];
 
+const STICKER_CATEGORIES: { label: string; emoji: string; items: string[] }[] = [
+  {
+    label: "Glam",
+    emoji: "💅",
+    items: ["💅", "👑", "💄", "💋", "🪞", "💍", "🧴", "🫦", "🌂", "💎"],
+  },
+  {
+    label: "Nature",
+    emoji: "🌸",
+    items: ["🌸", "🌷", "🌹", "🪷", "🌺", "🍓", "🍒", "🌙", "⭐", "🌈"],
+  },
+  {
+    label: "Mood",
+    emoji: "✨",
+    items: ["✨", "💕", "🥰", "💫", "🦋", "🎀", "🩷", "💖", "🫶", "🤍"],
+  },
+  {
+    label: "Fun",
+    emoji: "🎉",
+    items: ["🎉", "🎀", "🧁", "☕", "🍵", "🕯️", "📖", "🎵", "🛁", "🌙"],
+  },
+];
+
+type Sticker = {
+  id: string;
+  emoji: string;
+  x: number;
+  y: number;
+};
+
 type Entry = {
   id: string;
   date: string;
@@ -32,9 +63,12 @@ export default function Journal() {
   const [entries, setEntries] = useLocalStorage<Entry[]>("journal_entries", []);
   const [coverColor, setCoverColor] = useLocalStorage("journal_cover", "burgundy");
   const [fontStyle, setFontStyle] = useLocalStorage("journal_font", "Clean");
+  const [stickers, setStickers] = useLocalStorage<Sticker[]>("journal_stickers", []);
   const [content, setContent] = useState("");
   const [prompt] = useState(() => PROMPTS[Math.floor(Math.random() * PROMPTS.length)]);
+  const [activeCategory, setActiveCategory] = useState(0);
   const t = useVibeTheme();
+  const paperRef = useRef<HTMLDivElement>(null);
 
   const cover = COVER_OPTIONS.find((c) => c.id === coverColor) ?? COVER_OPTIONS[2];
 
@@ -48,6 +82,32 @@ export default function Journal() {
     };
     setEntries([newEntry, ...entries].slice(0, 10));
     setContent("");
+  };
+
+  const addSticker = (emoji: string) => {
+    const paperEl = paperRef.current;
+    const w = paperEl?.offsetWidth ?? 400;
+    const h = paperEl?.offsetHeight ?? 580;
+    // Random position within paper bounds, avoiding edges
+    const x = 20 + Math.random() * (w - 80);
+    const y = 60 + Math.random() * (h - 120);
+    const newSticker: Sticker = {
+      id: `sticker_${Date.now()}_${Math.random()}`,
+      emoji,
+      x,
+      y,
+    };
+    setStickers((prev) => [...prev, newSticker]);
+  };
+
+  const removeSticker = (id: string) => {
+    setStickers((prev) => prev.filter((s) => s.id !== id));
+  };
+
+  const updateStickerPos = (id: string, x: number, y: number) => {
+    setStickers((prev) =>
+      prev.map((s) => (s.id === id ? { ...s, x, y } : s))
+    );
   };
 
   const getFontClass = () => {
@@ -64,9 +124,11 @@ export default function Journal() {
         <div className="flex flex-col md:flex-row gap-8">
 
           {/* Controls sidebar */}
-          <div className="w-full md:w-64 space-y-6 shrink-0">
+          <div className="w-full md:w-64 space-y-5 shrink-0">
+
+            {/* Style card */}
             <div
-              className="p-6 rounded-2xl space-y-5 shadow-sm"
+              className="p-5 rounded-2xl space-y-5 shadow-sm"
               style={{ background: t.cardBg, border: `1.5px solid ${t.cardBorder}` }}
             >
               <h3 className="font-serif font-bold text-xl" style={{ color: t.text }}>
@@ -74,9 +136,7 @@ export default function Journal() {
               </h3>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium" style={{ color: t.subtext }}>
-                  Cover Color
-                </label>
+                <label className="text-sm font-medium" style={{ color: t.subtext }}>Cover Color</label>
                 <div className="flex gap-2 flex-wrap">
                   {COVER_OPTIONS.map((c) => (
                     <button
@@ -89,9 +149,7 @@ export default function Journal() {
                         background: c.bg,
                         border: coverColor === c.id ? `3px solid ${c.spine}` : "3px solid transparent",
                         outline: coverColor === c.id ? `2px solid ${c.bg}` : "none",
-                        boxShadow: coverColor === c.id
-                          ? `0 0 0 3px ${c.spine}`
-                          : "0 1px 4px rgba(0,0,0,0.18)",
+                        boxShadow: coverColor === c.id ? `0 0 0 3px ${c.spine}` : "0 1px 4px rgba(0,0,0,0.18)",
                       }}
                     />
                   ))}
@@ -100,9 +158,7 @@ export default function Journal() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium" style={{ color: t.subtext }}>
-                  Font Style
-                </label>
+                <label className="text-sm font-medium" style={{ color: t.subtext }}>Font Style</label>
                 <Select value={fontStyle} onValueChange={setFontStyle}>
                   <SelectTrigger data-testid="select-font-style">
                     <SelectValue />
@@ -116,9 +172,65 @@ export default function Journal() {
               </div>
             </div>
 
+            {/* Sticker picker */}
+            <div
+              className="p-5 rounded-2xl shadow-sm space-y-3"
+              style={{ background: t.cardBg, border: `1.5px solid ${t.cardBorder}` }}
+            >
+              <h3 className="font-serif font-bold text-xl" style={{ color: t.text }}>
+                Add Stickers 🎀
+              </h3>
+              <p className="text-xs" style={{ color: t.subtext }}>
+                tap a sticker to place it on your page
+              </p>
+
+              {/* Category tabs */}
+              <div className="flex gap-1 flex-wrap">
+                {STICKER_CATEGORIES.map((cat, i) => (
+                  <button
+                    key={cat.label}
+                    onClick={() => setActiveCategory(i)}
+                    className="px-2.5 py-1 rounded-full text-xs font-medium transition-all"
+                    style={{
+                      background: activeCategory === i ? t.accent : `${t.accent}18`,
+                      color: activeCategory === i ? "#fff" : t.subtext,
+                    }}
+                  >
+                    {cat.emoji} {cat.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Sticker grid */}
+              <div className="grid grid-cols-5 gap-1.5">
+                {STICKER_CATEGORIES[activeCategory].items.map((emoji) => (
+                  <motion.button
+                    key={emoji}
+                    whileHover={{ scale: 1.25 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => addSticker(emoji)}
+                    className="text-2xl p-1.5 rounded-xl text-center transition-colors hover:bg-black/5"
+                    title={`Add ${emoji}`}
+                  >
+                    {emoji}
+                  </motion.button>
+                ))}
+              </div>
+
+              {stickers.length > 0 && (
+                <button
+                  onClick={() => setStickers([])}
+                  className="w-full text-xs py-1.5 rounded-lg transition-opacity hover:opacity-70 mt-1"
+                  style={{ color: t.subtext, border: `1px solid ${t.cardBorder}` }}
+                >
+                  clear all stickers
+                </button>
+              )}
+            </div>
+
             {/* Previous entries */}
             <div
-              className="p-6 rounded-2xl shadow-sm"
+              className="p-5 rounded-2xl shadow-sm"
               style={{ background: t.cardBg, border: `1.5px solid ${t.cardBorder}` }}
             >
               <h3 className="font-serif font-bold text-xl mb-4" style={{ color: t.text }}>
@@ -134,10 +246,7 @@ export default function Journal() {
                     <div
                       key={entry.id}
                       className="text-sm p-3 rounded-xl"
-                      style={{
-                        background: `${t.accent}12`,
-                        border: `1px solid ${t.cardBorder}`,
-                      }}
+                      style={{ background: `${t.accent}12`, border: `1px solid ${t.cardBorder}` }}
                     >
                       <p className="text-xs mb-1" style={{ color: t.subtext }}>{entry.date}</p>
                       <p className="line-clamp-2 italic" style={{ color: t.text }}>"{entry.content}"</p>
@@ -157,7 +266,7 @@ export default function Journal() {
             >
               {/* Spine */}
               <div
-                className="absolute left-0 top-0 bottom-0 w-10 md:w-14 rounded-l-sm z-10 flex flex-col items-center justify-center gap-1"
+                className="absolute left-0 top-0 bottom-0 w-10 md:w-14 rounded-l-sm z-10"
                 style={{
                   background: `linear-gradient(to right, ${cover.spine}, ${cover.bg})`,
                   borderRight: "1px solid rgba(0,0,0,0.15)",
@@ -167,7 +276,7 @@ export default function Journal() {
                 <div className="w-px h-full absolute left-4 top-0" style={{ background: "rgba(0,0,0,0.12)" }} />
               </div>
 
-              {/* Cover + Page area */}
+              {/* Cover + page area */}
               <div
                 className="relative ml-10 md:ml-14 rounded-r-3xl overflow-hidden"
                 style={{ background: cover.bg, minHeight: 640 }}
@@ -185,9 +294,11 @@ export default function Journal() {
 
                 {/* Paper */}
                 <div
-                  className="relative bg-[#FFFDF8] mx-6 my-5 rounded-r-2xl rounded-l-sm shadow-inner min-h-[580px] flex flex-col"
+                  ref={paperRef}
+                  className="relative bg-[#FFFDF8] mx-6 my-5 rounded-r-2xl rounded-l-sm shadow-inner min-h-[580px] flex flex-col overflow-hidden"
                   style={{ borderLeft: "1px solid rgba(0,0,0,0.06)" }}
                 >
+                  {/* Lined paper */}
                   <div
                     className="absolute inset-0 rounded-r-2xl pointer-events-none opacity-40"
                     style={{
@@ -196,6 +307,40 @@ export default function Journal() {
                     }}
                   />
 
+                  {/* Placed stickers — draggable */}
+                  {stickers.map((sticker) => (
+                    <motion.div
+                      key={sticker.id}
+                      drag
+                      dragMomentum={false}
+                      dragConstraints={paperRef}
+                      dragElastic={0}
+                      initial={{ x: sticker.x, y: sticker.y, scale: 0, opacity: 0 }}
+                      animate={{ x: sticker.x, y: sticker.y, scale: 1, opacity: 1 }}
+                      onDragEnd={(_, info) => {
+                        updateStickerPos(
+                          sticker.id,
+                          sticker.x + info.offset.x,
+                          sticker.y + info.offset.y
+                        );
+                      }}
+                      className="absolute z-30 cursor-grab active:cursor-grabbing group select-none"
+                      style={{ left: 0, top: 0 }}
+                    >
+                      <div className="relative">
+                        <span className="text-3xl leading-none drop-shadow-sm">{sticker.emoji}</span>
+                        <button
+                          onPointerDown={(e) => e.stopPropagation()}
+                          onClick={() => removeSticker(sticker.id)}
+                          className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gray-700 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                        >
+                          <X size={9} />
+                        </button>
+                      </div>
+                    </motion.div>
+                  ))}
+
+                  {/* Writing area */}
                   <div className="relative z-10 p-6 md:p-8 flex flex-col flex-grow">
                     <div className="text-center mb-6 pb-4" style={{ borderBottom: `1px solid ${cover.bg}60` }}>
                       <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-1">
@@ -231,6 +376,7 @@ export default function Journal() {
               </div>
             </motion.div>
           </div>
+
         </div>
       </div>
     </div>

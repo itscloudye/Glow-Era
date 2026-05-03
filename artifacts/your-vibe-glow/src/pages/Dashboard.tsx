@@ -128,7 +128,7 @@ export default function Dashboard() {
               hey {name}, ready to glow today? ✨
             </h1>
             <p className={`font-medium text-lg ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>{today}</p>
-            <div className="mt-4 w-full backdrop-blur-md" style={{ background: introBg }}>
+            <div className="mt-4 w-full rounded-3xl backdrop-blur-md" style={{ background: introBg }}>
               <p className="w-full px-5 py-4 text-sm md:text-base leading-relaxed text-[#F5E6C8]/90">
                 Glow Era is your little soft space to plan your routines, track your glow-ups, save your favorite Pinterest inspo, and check in with yourself daily.
                 It’s made to help the girlies feel organized, inspired, and a little more confident every day.

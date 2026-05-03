@@ -236,19 +236,30 @@ export default function Dashboard() {
           ].map((card, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -2 }}
-              className={`p-4 rounded-2xl flex flex-col gap-2 ${
+              whileHover={{ y: -6, rotate: i % 2 === 0 ? -1 : 1, scale: 1.02 }}
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 4 + i * 0.3, repeat: Infinity, ease: "easeInOut" }}
+              className={`relative p-5 flex flex-col gap-2 min-h-[170px] overflow-hidden ${
                 isDark
                   ? "bg-white/10 border border-white/15 backdrop-blur-sm"
                   : `${theme.card} ${theme.border}`
-              }`}
+              } star-badge-card`}
             >
-              <div className={`flex items-center gap-2 ${card.iconColor}`}>
+              <div className="absolute inset-0 pointer-events-none star-badge-shimmer" />
+              <div className="absolute -top-2 -right-2 text-[#C9A84C] opacity-50 text-xl animate-float-slow">✦</div>
+              <div className="absolute -bottom-2 -left-1 text-[#F4A8C0] opacity-50 text-lg animate-float-slow delay-200">✧</div>
+              <div className={`relative z-10 flex items-center gap-2 ${card.iconColor}`}>
                 {card.icon}
                 <span className={`font-medium text-sm ${isDark ? "text-[#F5E6C8]" : theme.text}`}>{card.label}</span>
               </div>
-              <div className={`text-2xl font-bold ${isDark ? "text-white" : theme.text}`}>{card.value}</div>
-              {card.extra}
+              <div className="relative z-10 flex items-center justify-between gap-3">
+                <div className={`text-2xl font-bold ${isDark ? "text-white" : theme.text}`}>{card.value}</div>
+                <div className="shrink-0 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.25em] border border-white/20 bg-white/20 text-white/90">
+                  joy
+                </div>
+              </div>
+              <div className="relative z-10">{card.extra}</div>
+              <div className="absolute inset-[10px] rounded-[2rem] border border-dashed border-white/25 opacity-60 star-dash-border" />
             </motion.div>
           ))}
         </div>

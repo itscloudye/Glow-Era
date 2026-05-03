@@ -33,7 +33,7 @@ type ToastCompliment = {
 
 export default function Moodboard() {
   const [photos, setPhotos] = useLocalStorage<Photo[]>("moodboard_photos", []);
-  const [boardTitle, setBoardTitle] = useLocalStorage("moodboard_title", "Your Pinterest Board");
+  const [boardTitle, setBoardTitle] = useLocalStorage("moodboard_title", "your pintrest board");
   const [editingTitle, setEditingTitle] = useState(false);
   const [titleInput, setTitleInput] = useState("");
   const [toasts, setToasts] = useState<ToastCompliment[]>([]);

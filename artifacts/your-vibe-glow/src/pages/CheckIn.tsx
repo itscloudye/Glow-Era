@@ -28,8 +28,8 @@ export default function CheckIn() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col" style={{ background: t.pageBg }}>
-      <div className="container mx-auto p-4 md:p-8 max-w-2xl flex-1 flex flex-col justify-center">
+    <div className="w-full flex flex-col" style={{ background: t.pageBg }}>
+      <div className="container mx-auto p-4 md:p-8 max-w-2xl flex flex-col justify-center py-16">
         <AnimatePresence mode="wait">
           {submitted ? (
             <motion.div

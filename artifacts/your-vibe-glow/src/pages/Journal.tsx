@@ -60,7 +60,7 @@ export default function Journal() {
   };
 
   return (
-    <div className="min-h-screen w-full" style={{ background: t.pageBg }}>
+    <div className="w-full" style={{ background: t.pageBg }}>
       <div className="container mx-auto p-4 md:p-8">
         <div className="flex flex-col md:flex-row gap-8">
 

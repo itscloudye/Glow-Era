@@ -84,7 +84,7 @@ export default function Suggestions() {
   const data = SUGGESTIONS_DATA[vibeResult] || SUGGESTIONS_DATA["Balanced Muse"];
 
   return (
-    <div className="min-h-screen w-full" style={{ background: t.pageBg }}>
+    <div className="w-full" style={{ background: t.pageBg }}>
       <div className="container mx-auto p-4 md:p-8 max-w-5xl">
         <motion.header
           initial={{ opacity: 0, y: -16 }}

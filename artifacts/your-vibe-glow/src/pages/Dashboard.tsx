@@ -119,7 +119,6 @@ export default function Dashboard() {
       localStorage.removeItem("todayMood");
       localStorage.removeItem("journal_cover");
       localStorage.removeItem("userName");
-      localStorage.removeItem("hasSeenQuizAlert");
     }
   }, []);
 
@@ -151,7 +150,7 @@ export default function Dashboard() {
     const timer = setTimeout(() => {
       setQuizOpen(true);
       setHasSeenQuizAlert(true);
-    }, 4000);
+    }, 7000);
     return () => clearTimeout(timer);
   }, [hasSeenQuizAlert, setHasSeenQuizAlert]);
 

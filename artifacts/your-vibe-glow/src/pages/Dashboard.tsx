@@ -58,11 +58,11 @@ const VIBE_THEMES: Record<string, {
   "Balanced Muse": {
     bg: "",
     card: "border shadow-sm",
-    accent: "bg-[#EDE8F5]/60",
-    text: "text-[#4A3570]",
-    subtext: "text-[#7B6AA0]",
-    suggestionCard: "bg-[#E8DFF5] border border-[#C9B8E8]",
-    border: "border-[#C9B8E8]",
+    accent: "bg-[#EEE5FB]/70",
+    text: "text-[#4E3A72]",
+    subtext: "text-[#7E6A9E]",
+    suggestionCard: "bg-[#F1EAFE] border border-[#D1BDEB]",
+    border: "border-[#D1BDEB]",
   },
 };
 
@@ -71,7 +71,7 @@ const VIBE_BG_STYLE: Record<string, React.CSSProperties> = {
   "Clean Girl": { background: "linear-gradient(150deg, #FDF6EC 0%, #F5EBE0 40%, #EDD9BE 100%)" },
   "Dark Feminine": { background: "linear-gradient(150deg, #1A0008 0%, #2D0010 35%, #4D0018 70%, #800020 100%)" },
   "Soft Glow": { background: "linear-gradient(150deg, #FFF5F8 0%, #FDE8EF 40%, #F8C8D4 100%)" },
-  "Balanced Muse": { background: "linear-gradient(150deg, #F8F5FF 0%, #EDE8F5 40%, #DDD0F0 100%)" },
+  "Balanced Muse": { background: "linear-gradient(150deg, #F7F1FF 0%, #EEE5FB 42%, #E3D4F7 100%)" },
 };
 
 const SUGGESTIONS: Record<string, string> = {
@@ -102,6 +102,7 @@ export default function Dashboard() {
   const theme = VIBE_THEMES[vibeResult] ?? VIBE_THEMES[""];
   const bgStyle = VIBE_BG_STYLE[vibeResult] ?? VIBE_BG_STYLE[""];
   const isDark = vibeResult === "Dark Feminine";
+  const isBalanced = vibeResult === "Balanced Muse";
 
   return (
     <div className="min-h-[100dvh] transition-all duration-700" style={bgStyle}>
@@ -248,9 +249,7 @@ export default function Dashboard() {
                 <span className={`font-medium text-sm ${isDark ? "text-[#F5E6C8]" : theme.text}`}>{card.label}</span>
               </div>
               <div className={`text-2xl font-bold ${isDark ? "text-white" : theme.text}`}>{card.value}</div>
-              <div>
-                {card.extra}
-              </div>
+              <div>{card.extra}</div>
             </motion.div>
           ))}
         </div>
@@ -270,7 +269,7 @@ export default function Dashboard() {
               data-testid="link-tracker"
             >
               <motion.div whileHover={{ rotateY: -8, scale: 1.05 }} transition={{ type: "spring", stiffness: 260, damping: 20 }}>
-                <TrackerMini accentColor={isDark ? "#D4A0B5" : "#9B2555"} />
+                <TrackerMini accentColor={isDark ? "#D4A0B5" : isBalanced ? "#B89AE8" : "#9B2555"} />
               </motion.div>
               <div>
                 <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Tracker</h3>

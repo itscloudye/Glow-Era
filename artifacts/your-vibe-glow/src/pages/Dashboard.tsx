@@ -91,6 +91,7 @@ export default function Dashboard() {
   const [userName, setUserName] = useLocalStorage("userName", "");
   const [nameInput, setNameInput] = useState("");
   const [quizOpen, setQuizOpen] = useState(false);
+  const [hasSeenQuizAlert, setHasSeenQuizAlert] = useLocalStorage("hasSeenQuizAlert", false);
 
   const name = userName || "bestie";
   const handleSaveName = () => {
@@ -108,9 +109,13 @@ export default function Dashboard() {
     : "linear-gradient(135deg, rgba(42,10,24,0.88) 0%, rgba(82,20,45,0.82) 100%)";
 
   useEffect(() => {
-    const timer = setTimeout(() => setQuizOpen(true), 4000);
+    if (hasSeenQuizAlert) return;
+    const timer = setTimeout(() => {
+      setQuizOpen(true);
+      setHasSeenQuizAlert(true);
+    }, 4000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [hasSeenQuizAlert, setHasSeenQuizAlert]);
 
   return (
     <div className="min-h-[100dvh] transition-all duration-700" style={bgStyle}>

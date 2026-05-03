@@ -259,7 +259,7 @@ export default function Dashboard() {
               <p className="font-serif text-xl font-semibold text-foreground">find your glow vibe, {name} ✨</p>
               <p className="text-muted-foreground text-sm mt-1">Take the 5-question quiz to unlock your personalized aesthetic theme and glow suggestions</p>
             </div>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full md:w-auto md:justify-end">
               <Button
                 onClick={() => setQuizOpen(true)}
                 className="rounded-full bg-primary hover:bg-primary/90 text-white px-6"
@@ -267,12 +267,13 @@ export default function Dashboard() {
               >
                 Retake Vibe Quiz ✨
               </Button>
-              <div className="relative w-24 h-24 rounded-full bg-white/95 shadow-md border-2 flex items-center justify-center" style={{ borderColor: isDark ? "rgba(255,255,255,0.35)" : "rgba(244,168,192,0.55)" }}>
-                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(${isDark ? "#C9A84C" : "#9B2555"} 0 331.2deg, rgba(0,0,0,0.08) 331.2deg 360deg)` }} />
-                <div className="absolute inset-[7px] rounded-full bg-white/95" />
+              <div className="relative w-28 h-28 rounded-full bg-white/95 shadow-lg border-2 flex items-center justify-center shrink-0" style={{ borderColor: isDark ? "rgba(255,255,255,0.35)" : "rgba(244,168,192,0.55)" }}>
+                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(${isDark ? "#C9A84C" : "#9B2555"} 0 331.2deg, rgba(0,0,0,0.10) 331.2deg 360deg)` }} />
+                <div className="absolute inset-[8px] rounded-full bg-white/98" />
                 <div className="relative z-10 text-center leading-none" style={{ color: isDark ? "#F5E6C8" : "#7D2547" }}>
                   <div className="text-[10px] uppercase tracking-[0.18em] opacity-70">Goals</div>
-                  <div className="text-xl font-bold">92%</div>
+                  <div className="text-2xl font-bold">92%</div>
+                  <div className="text-[10px] mt-1 opacity-70">hit rate</div>
                 </div>
               </div>
             </div>

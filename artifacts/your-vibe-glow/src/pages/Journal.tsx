@@ -15,11 +15,10 @@ const PROMPTS = [
 ];
 
 export const COVER_OPTIONS = [
-  { id: "black",       label: "Black",       bg: "#111111", spine: "#000000", text: "#C9A84C" },
-  { id: "white",       label: "White",       bg: "#FAFAFA", spine: "#E0E0E0", text: "#9B2555" },
-  { id: "burgundy",    label: "Burgundy",    bg: "#6D1A36", spine: "#3A0A1E", text: "#C9A84C" },
-  { id: "light-pink",  label: "Light Pink",  bg: "#F8C8D4", spine: "#E8809F", text: "#6D1A36" },
-  { id: "deep-purple", label: "Deep Purple", bg: "#3D1A5C", spine: "#220C38", text: "#E8D5F5" },
+  { id: "black",      label: "Black",      bg: "#111111", spine: "#000000", text: "#C9A84C" },
+  { id: "white",      label: "White",      bg: "#FAFAFA", spine: "#E0E0E0", text: "#9B2555" },
+  { id: "burgundy",   label: "Burgundy",   bg: "#6D1A36", spine: "#3A0A1E", text: "#C9A84C" },
+  { id: "light-pink", label: "Light Pink", bg: "#F8C8D4", spine: "#E8809F", text: "#6D1A36" },
 ];
 
 type Entry = {

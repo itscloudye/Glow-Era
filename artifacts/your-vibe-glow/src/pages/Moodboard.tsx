@@ -33,7 +33,7 @@ type ToastCompliment = {
 
 export default function Moodboard() {
   const [photos, setPhotos] = useLocalStorage<Photo[]>("moodboard_photos", []);
-  const [boardTitle, setBoardTitle] = useLocalStorage("moodboard_title", "my glow board ✨");
+  const [boardTitle, setBoardTitle] = useLocalStorage("moodboard_title", "Your Pinterest Board");
   const [editingTitle, setEditingTitle] = useState(false);
   const [titleInput, setTitleInput] = useState("");
   const [toasts, setToasts] = useState<ToastCompliment[]>([]);
@@ -119,61 +119,80 @@ export default function Moodboard() {
       </div>
 
       <div className="container mx-auto px-4 md:px-8 py-8 max-w-6xl">
-
-        {/* Header */}
-        <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div>
-            {editingTitle ? (
-              <input
-                autoFocus
-                value={titleInput}
-                onChange={(e) => setTitleInput(e.target.value)}
-                onBlur={() => {
-                  if (titleInput.trim()) setBoardTitle(titleInput.trim());
-                  setEditingTitle(false);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
+        <div className="mb-8 flex flex-col gap-5">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] mb-2" style={{ color: t.subtext }}>
+                inspiration feed
+              </p>
+              {editingTitle ? (
+                <input
+                  autoFocus
+                  value={titleInput}
+                  onChange={(e) => setTitleInput(e.target.value)}
+                  onBlur={() => {
                     if (titleInput.trim()) setBoardTitle(titleInput.trim());
                     setEditingTitle(false);
-                  }
-                  if (e.key === "Escape") setEditingTitle(false);
-                }}
-                className="text-3xl md:text-4xl font-serif font-bold bg-transparent border-b-2 outline-none w-full"
-                style={{ color: t.text, borderColor: t.accent }}
-              />
-            ) : (
-              <h1
-                className="text-3xl md:text-4xl font-serif font-bold cursor-pointer hover:opacity-75 transition-opacity"
-                style={{ color: t.text }}
-                onClick={() => { setTitleInput(boardTitle); setEditingTitle(true); }}
-                title="Click to rename"
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      if (titleInput.trim()) setBoardTitle(titleInput.trim());
+                      setEditingTitle(false);
+                    }
+                    if (e.key === "Escape") setEditingTitle(false);
+                  }}
+                  className="text-3xl md:text-4xl font-serif font-bold bg-transparent border-b-2 outline-none w-full"
+                  style={{ color: t.text, borderColor: t.accent }}
+                />
+              ) : (
+                <h1
+                  className="text-3xl md:text-4xl font-serif font-bold cursor-pointer hover:opacity-75 transition-opacity"
+                  style={{ color: t.text }}
+                  onClick={() => { setTitleInput(boardTitle); setEditingTitle(true); }}
+                  title="Click to rename"
+                >
+                  {boardTitle}
+                </h1>
+              )}
+              <p className="mt-1 text-sm" style={{ color: t.subtext }}>
+                {photos.length === 0 ? "save and upload ideas to build your board" : `${photos.length} photo${photos.length === 1 ? "" : "s"} on your board`}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => inputRef.current?.click()}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all hover:opacity-85 shrink-0"
+                style={{ background: t.buttonBg, color: t.buttonText }}
               >
-                {boardTitle}
-              </h1>
-            )}
-            <p className="mt-1 text-sm" style={{ color: t.subtext }}>
-              {photos.length === 0 ? "add your first photo to start your board" : `${photos.length} photo${photos.length === 1 ? "" : "s"} on your board`}
-            </p>
+                <Plus className="w-4 h-4" />
+                Add Photos
+              </button>
+              <input
+                ref={inputRef}
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={handleFileChange}
+              />
+            </div>
           </div>
 
-          {/* Upload button */}
-          <button
-            onClick={() => inputRef.current?.click()}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all hover:opacity-85 shrink-0"
-            style={{ background: t.buttonBg, color: t.buttonText }}
-          >
-            <Plus className="w-4 h-4" />
-            Add Photos
-          </button>
-          <input
-            ref={inputRef}
-            type="file"
-            accept="image/*"
-            multiple
-            className="hidden"
-            onChange={handleFileChange}
-          />
+          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+            {["For you", "Beauty", "Outfits", "Travel", "Room inspo", "Glow up"].map((item, idx) => (
+              <button
+                key={item}
+                className="px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap"
+                style={{
+                  background: idx === 0 ? t.buttonBg : `${t.accent}14`,
+                  color: idx === 0 ? t.buttonText : t.text,
+                }}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Drop zone / empty state */}
@@ -233,7 +252,7 @@ export default function Moodboard() {
               </span>
             </motion.div>
 
-            {/* Pinterest masonry grid */}
+            {/* Pinterest home feed */}
             <div
               className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3"
               style={{ columnGap: "12px" }}
@@ -244,7 +263,7 @@ export default function Moodboard() {
                   initial={{ opacity: 0, scale: 0.9, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ delay: idx < 8 ? idx * 0.04 : 0, type: "spring", stiffness: 260, damping: 22 }}
-                  className="break-inside-avoid mb-3 relative group rounded-2xl overflow-hidden cursor-pointer"
+                  className="break-inside-avoid mb-3 relative group rounded-3xl overflow-hidden cursor-pointer bg-white"
                   onMouseEnter={() => setHoveredId(photo.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   style={{

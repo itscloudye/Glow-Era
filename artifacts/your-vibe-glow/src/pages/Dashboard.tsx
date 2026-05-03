@@ -161,7 +161,7 @@ export default function Dashboard() {
     const timer = setTimeout(() => {
       setQuizOpen(true);
       setHasSeenQuizAlert(true);
-    }, 7000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, [hasSeenQuizAlert, setHasSeenQuizAlert, vibeResult]);
 

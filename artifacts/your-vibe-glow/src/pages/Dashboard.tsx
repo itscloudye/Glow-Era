@@ -134,6 +134,9 @@ export default function Dashboard() {
                 to plan your routines, track your glow-ups,
                 save your favorite Pinterest inspo,
                 and check in with yourself daily.
+                It helps the girlies stay organized,
+                feel inspired,
+                and keep up with their glow era.
               </p>
             </div>
           </div>

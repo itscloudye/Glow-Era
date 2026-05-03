@@ -40,13 +40,13 @@ export default function Home() {
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
   useEffect(() => {
-    const generated = Array.from({ length: 22 }).map((_, i) => ({
+    const generated = Array.from({ length: 16 }).map((_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
-      delay: Math.random() * 5,
-      size: 12 + Math.random() * 18,
-      duration: 2.5 + Math.random() * 2.5,
+      delay: Math.random() * 6,
+      size: 28 + Math.random() * 28,
+      duration: 5 + Math.random() * 4,
       rotation: Math.random() * 360,
     }));
     setSparkles(generated);
@@ -74,10 +74,10 @@ export default function Home() {
                 rotate: sparkle.rotation,
               }}
               animate={{
-                y: [0, -18, 0],
-                rotate: [sparkle.rotation, sparkle.rotation + 15, sparkle.rotation],
-                opacity: [0.5, 1, 0.5],
-                scale: [0.85, 1.15, 0.85],
+                y: [0, -8, 0],
+                rotate: [sparkle.rotation, sparkle.rotation + 5, sparkle.rotation],
+                opacity: [0.55, 0.85, 0.55],
+                scale: [0.95, 1.05, 0.95],
               }}
               transition={{
                 duration: sparkle.duration,

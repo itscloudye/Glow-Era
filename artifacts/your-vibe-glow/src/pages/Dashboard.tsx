@@ -111,6 +111,16 @@ export default function Dashboard() {
   const [hasSeenQuizAlert, setHasSeenQuizAlert] = useLocalStorage("hasSeenQuizAlert", false);
   const [helpOpen, setHelpOpen] = useState(false);
 
+  useEffect(() => {
+    localStorage.removeItem("vibeResult");
+    localStorage.removeItem("streak");
+    localStorage.removeItem("glowLevel");
+    localStorage.removeItem("todayMood");
+    localStorage.removeItem("journal_cover");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("hasSeenQuizAlert");
+  }, []);
+
   const name = userName || "bestie";
   const handleSaveName = () => {
     const trimmed = nameInput.trim();

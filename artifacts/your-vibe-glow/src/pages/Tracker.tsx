@@ -368,7 +368,8 @@ export default function Tracker() {
 
         {/* Heart cards */}
         <div className="space-y-8">
-          {Object.entries(habitsData).map(([category, habits], index) => {
+          {["Spiritual", "Health", "Skin", "Hair", "Creativity"].map((category, index) => {
+            const habits = habitsData[category] ?? [];
             const config = CATEGORY_CONFIG[category] ?? { emoji: "⭐", tip: "You're doing amazing — keep going!" };
             return (
               <HeartCard

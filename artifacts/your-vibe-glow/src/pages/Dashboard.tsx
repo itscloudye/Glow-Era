@@ -138,19 +138,6 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-          <Button
-            onClick={() => setQuizOpen(true)}
-            variant="outline"
-            className={`rounded-full flex items-center gap-2 text-sm font-medium transition-all ${
-              isDark
-                ? "border-[#9B2555]/50 text-[#F5E6C8] hover:bg-[#9B2555]/20"
-                : `${theme.border} ${theme.text} hover:bg-black/5`
-            }`}
-            data-testid="button-open-quiz"
-          >
-            <Wand2 className="w-4 h-4" />
-            {vibeResult ? "Retake Vibe Quiz" : "Discover Your Vibe ✨"}
-          </Button>
         </header>
 
         {/* Vibe badge */}
@@ -389,6 +376,22 @@ export default function Dashboard() {
             {SUGGESTIONS[vibeResult] ?? SUGGESTIONS[""]}
           </p>
         </motion.div>
+
+        <div className="mt-6 flex justify-end">
+          <Button
+            onClick={() => setQuizOpen(true)}
+            variant="outline"
+            className={`rounded-full flex items-center gap-2 text-sm font-medium transition-all ${
+              isDark
+                ? "border-[#9B2555]/50 text-[#F5E6C8] hover:bg-[#9B2555]/20"
+                : `${theme.border} ${theme.text} hover:bg-black/5`
+            }`}
+            data-testid="button-open-quiz"
+          >
+            <Wand2 className="w-4 h-4" />
+            {vibeResult ? "Retake Vibe Quiz" : "Discover Your Vibe ✨"}
+          </Button>
+        </div>
 
       </div>
 

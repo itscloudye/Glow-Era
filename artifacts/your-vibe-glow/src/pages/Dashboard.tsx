@@ -112,13 +112,15 @@ export default function Dashboard() {
   const [helpOpen, setHelpOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.removeItem("vibeResult");
-    localStorage.removeItem("streak");
-    localStorage.removeItem("glowLevel");
-    localStorage.removeItem("todayMood");
-    localStorage.removeItem("journal_cover");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("hasSeenQuizAlert");
+    if (window.location.pathname === "/") {
+      localStorage.removeItem("vibeResult");
+      localStorage.removeItem("streak");
+      localStorage.removeItem("glowLevel");
+      localStorage.removeItem("todayMood");
+      localStorage.removeItem("journal_cover");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("hasSeenQuizAlert");
+    }
   }, []);
 
   const name = userName || "bestie";

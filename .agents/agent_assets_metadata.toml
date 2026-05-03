@@ -1,0 +1,26 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "yWYafyqMJqd-0lE2a7Cqj"
+uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-1.jpg"
+type = "image"
+title = "pink flat lay fashion accessories"
+
+[[outputs]]
+id = "piv4Y9J0IMZ-tFJrBJ4_S"
+uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-2.jpg"
+type = "image"
+title = "aesthetic skincare products"
+
+[[outputs]]
+id = "loaKYeQinzjPsj4tHuDSu"
+uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-3.jpg"
+type = "image"
+title = "pink flowers aesthetic"
+
+[[outputs]]
+id = "UhVKDvv8tS36RyuJcfe81"
+uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-4.jpg"
+type = "image"
+title = "girly bedroom decor aesthetic"

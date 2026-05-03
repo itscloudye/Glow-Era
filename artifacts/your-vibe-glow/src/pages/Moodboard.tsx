@@ -19,6 +19,13 @@ const COMPLIMENTS = [
   "that's giving everything 🔥",
 ];
 
+const STARTER_PHOTOS = [
+  { src: "/moodboard-starter-1.jpg", compliment: "gorgeous ✨", caption: "pink accessories" },
+  { src: "/moodboard-starter-2.jpg", compliment: "obsessed with this 😍", caption: "skincare shelf" },
+  { src: "/moodboard-starter-3.jpg", compliment: "queen behavior 👑", caption: "soft florals" },
+  { src: "/moodboard-starter-4.jpg", compliment: "pure aesthetic 🌸", caption: "dreamy room" },
+];
+
 type Photo = {
   id: string;
   src: string;
@@ -32,7 +39,12 @@ type ToastCompliment = {
 };
 
 export default function Moodboard() {
-  const [photos, setPhotos] = useLocalStorage<Photo[]>("moodboard_photos", []);
+  const [photos, setPhotos] = useLocalStorage<Photo[]>("moodboard_photos", STARTER_PHOTOS.map((photo, index) => ({
+    id: `starter_${index}`,
+    src: photo.src,
+    compliment: photo.compliment,
+    caption: photo.caption,
+  })));
   const [boardTitle, setBoardTitle] = useLocalStorage("moodboard_title", "Your Pinterest Board");
   const [editingTitle, setEditingTitle] = useState(false);
   const [titleInput, setTitleInput] = useState("");
@@ -118,7 +130,7 @@ export default function Moodboard() {
         </AnimatePresence>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 py-8 max-w-6xl">
+      <div className="container mx-auto px-4 md:px-8 py-8 max-w-7xl">
         <div className="mb-8 flex flex-col gap-5">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
@@ -254,8 +266,8 @@ export default function Moodboard() {
 
             {/* Pinterest home feed */}
             <div
-              className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3"
-              style={{ columnGap: "12px" }}
+              className="columns-2 md:columns-3 xl:columns-4 gap-4 space-y-4"
+              style={{ columnGap: "16px" }}
             >
               {photos.map((photo, idx) => (
                 <motion.div
@@ -263,7 +275,7 @@ export default function Moodboard() {
                   initial={{ opacity: 0, scale: 0.9, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ delay: idx < 8 ? idx * 0.04 : 0, type: "spring", stiffness: 260, damping: 22 }}
-                  className="break-inside-avoid mb-3 relative group rounded-3xl overflow-hidden cursor-pointer bg-white"
+                  className="break-inside-avoid mb-4 relative group rounded-[28px] overflow-hidden cursor-pointer bg-white"
                   onMouseEnter={() => setHoveredId(photo.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   style={{
@@ -278,7 +290,7 @@ export default function Moodboard() {
                     src={photo.src}
                     alt="moodboard photo"
                     className="w-full object-cover block"
-                    style={{ borderRadius: "16px" }}
+                    style={{ borderRadius: "28px" }}
                     draggable={false}
                   />
 
@@ -292,7 +304,7 @@ export default function Moodboard() {
                         className="absolute inset-0 flex flex-col justify-between p-3"
                         style={{
                           background: "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.5) 100%)",
-                          borderRadius: "16px",
+                          borderRadius: "28px",
                         }}
                       >
                         {/* Remove button */}

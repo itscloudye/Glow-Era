@@ -327,6 +327,31 @@ export default function Dashboard() {
           </Link>
         </div>
 
+        {/* Moodboard */}
+        <Link href="/moodboard">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className={`mb-8 p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
+              isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15" : `bg-card ${theme.border} border hover:border-primary/40`
+            }`}
+            data-testid="link-moodboard"
+          >
+            <div className="relative shrink-0">
+              <div className="w-14 h-18 rounded-2xl overflow-hidden shadow-md border border-white/30 bg-gradient-to-b from-[#F7F1FF] to-[#E3D4F7] flex items-center justify-center">
+                <div className="w-10 h-14 rounded-xl bg-white/70 flex items-center justify-center text-2xl">
+                  📌
+                </div>
+              </div>
+              <div className="absolute -right-1 top-1 w-3.5 h-3.5 rounded-full bg-[#B89AE8] border border-white/70" />
+            </div>
+            <div>
+              <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Moodboard</h3>
+              <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>upload your inspo photos</p>
+              <p className={`text-xs mt-1 opacity-70 ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>pinterest-style board</p>
+            </div>
+          </motion.div>
+        </Link>
+
         {/* Suggestion */}
         <motion.div
           whileHover={{ y: -2 }}

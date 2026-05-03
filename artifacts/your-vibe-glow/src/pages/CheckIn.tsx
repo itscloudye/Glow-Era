@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useVibeTheme } from "@/hooks/useVibeTheme";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MOODS = [
@@ -20,6 +19,7 @@ export default function CheckIn() {
   const [q2, setQ2] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const name = userName || "bestie";
+  const t = useVibeTheme();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +28,7 @@ export default function CheckIn() {
   };
 
   return (
-    <div
-      className="min-h-screen w-full flex flex-col"
-      style={{ background: "#F5F0E8" }}
-    >
+    <div className="min-h-screen w-full flex flex-col" style={{ background: t.pageBg }}>
       <div className="container mx-auto p-4 md:p-8 max-w-2xl flex-1 flex flex-col justify-center">
         <AnimatePresence mode="wait">
           {submitted ? (
@@ -39,19 +36,23 @@ export default function CheckIn() {
               key="success"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="p-8 rounded-3xl text-center space-y-6"
-              style={{ background: "#FFF8F0", border: "1px solid rgba(155,37,85,0.15)" }}
+              className="p-8 rounded-3xl text-center space-y-6 shadow-sm"
+              style={{ background: t.cardBg, border: `1.5px solid ${t.cardBorder}` }}
             >
               <div className="text-6xl">💖</div>
-              <h2 className="text-3xl font-serif font-bold">proud of you, {name} 💕</h2>
-              <p className="text-xl text-muted-foreground">you showed up today and that's everything.</p>
-              <Button
-                variant="outline"
-                className="mt-4 rounded-full"
+              <h2 className="text-3xl font-serif font-bold" style={{ color: t.text }}>
+                proud of you, {name} 💕
+              </h2>
+              <p className="text-xl" style={{ color: t.subtext }}>
+                you showed up today and that's everything.
+              </p>
+              <button
                 onClick={() => setSubmitted(false)}
+                className="mt-4 px-6 py-2.5 rounded-full text-sm font-medium border transition-opacity hover:opacity-80"
+                style={{ borderColor: t.accent, color: t.accent, background: "transparent" }}
               >
                 log another entry
-              </Button>
+              </button>
             </motion.div>
           ) : (
             <motion.div
@@ -60,13 +61,17 @@ export default function CheckIn() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className="p-6 md:p-10 rounded-3xl shadow-sm"
-              style={{ background: "#FFF8F0", border: "1px solid rgba(155,37,85,0.12)" }}
+              style={{ background: t.cardBg, border: `1.5px solid ${t.cardBorder}` }}
             >
-              <h1 className="text-3xl font-serif font-bold mb-8 text-center">Daily Check-In ✨</h1>
+              <h1 className="text-3xl font-serif font-bold mb-8 text-center" style={{ color: t.text }}>
+                Daily Check-In ✨
+              </h1>
 
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-4">
-                  <Label className="text-lg">how are you feeling today?</Label>
+                  <label className="text-base font-medium" style={{ color: t.subtext }}>
+                    how are you feeling today?
+                  </label>
                   <div className="grid grid-cols-5 gap-3">
                     {MOODS.map((m) => {
                       const selected = mood === m.emoji;
@@ -79,17 +84,15 @@ export default function CheckIn() {
                           onClick={() => setMood(m.emoji)}
                           className="flex flex-col items-center gap-2 py-4 px-2 rounded-2xl transition-all"
                           style={{
-                            background: selected ? "rgba(155,37,85,0.12)" : "rgba(255,255,255,0.7)",
-                            border: selected
-                              ? "2px solid rgba(155,37,85,0.5)"
-                              : "2px solid transparent",
-                            boxShadow: selected ? "0 2px 8px rgba(155,37,85,0.1)" : "none",
+                            background: selected ? `${t.accent}22` : t.inputBg,
+                            border: `2px solid ${selected ? t.accent : "transparent"}`,
+                            boxShadow: selected ? `0 2px 8px ${t.accent}30` : "none",
                           }}
                         >
                           <span className="text-4xl leading-none">{m.emoji}</span>
                           <span
                             className="text-xs font-medium text-center leading-tight"
-                            style={{ color: selected ? "#9B2555" : "#888" }}
+                            style={{ color: selected ? t.accent : t.subtext }}
                           >
                             {m.label}
                           </span>
@@ -100,35 +103,49 @@ export default function CheckIn() {
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-lg">what's one thing you did for yourself today?</Label>
-                  <Input
+                  <label className="text-base font-medium" style={{ color: t.subtext }}>
+                    what's one thing you did for yourself today?
+                  </label>
+                  <input
+                    type="text"
                     value={q1}
                     onChange={(e) => setQ1(e.target.value)}
                     placeholder="I took a nice long shower..."
-                    className="text-base py-6 rounded-xl"
-                    style={{ background: "rgba(255,255,255,0.85)" }}
+                    className="w-full rounded-xl px-4 py-3.5 text-base border focus:outline-none focus:ring-2 transition-all"
+                    style={{
+                      background: t.inputBg,
+                      borderColor: t.cardBorder,
+                      color: t.text,
+                    }}
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-lg">what made you smile?</Label>
-                  <Input
+                  <label className="text-base font-medium" style={{ color: t.subtext }}>
+                    what made you smile?
+                  </label>
+                  <input
+                    type="text"
                     value={q2}
                     onChange={(e) => setQ2(e.target.value)}
                     placeholder="A cute dog on my walk..."
-                    className="text-base py-6 rounded-xl"
-                    style={{ background: "rgba(255,255,255,0.85)" }}
+                    className="w-full rounded-xl px-4 py-3.5 text-base border focus:outline-none focus:ring-2 transition-all"
+                    style={{
+                      background: t.inputBg,
+                      borderColor: t.cardBorder,
+                      color: t.text,
+                    }}
                   />
                 </div>
 
-                <Button
+                <button
                   type="submit"
-                  size="lg"
                   disabled={!mood}
-                  className="w-full py-6 text-lg rounded-xl bg-primary hover:bg-primary/90 text-white"
+                  className="w-full py-4 text-lg rounded-xl font-semibold transition-all disabled:opacity-40"
+                  style={{ background: t.buttonBg, color: t.buttonText }}
                 >
                   log my glow ✨
-                </Button>
+                </button>
               </form>
             </motion.div>
           )}

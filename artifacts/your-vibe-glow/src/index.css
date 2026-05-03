@@ -111,7 +111,7 @@
   --chart-5: 30 50% 70%;
   --radius: 1rem;
 
-  --app-font-sans: 'DM Serif Text', serif;
+  --app-font-sans: 'Inter', sans-serif;
   --app-font-serif: 'Italianno', cursive;
   --app-font-mono: Menlo, monospace;
 }

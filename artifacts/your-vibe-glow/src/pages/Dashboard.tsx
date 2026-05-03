@@ -259,16 +259,17 @@ export default function Dashboard() {
               <p className="font-serif text-xl font-semibold text-foreground">find your glow vibe, {name} ✨</p>
               <p className="text-muted-foreground text-sm mt-1">Take the 5-question quiz to unlock your personalized aesthetic theme and glow suggestions</p>
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full md:w-auto">
               <Button
                 onClick={() => setQuizOpen(true)}
-                className="rounded-full bg-primary hover:bg-primary/90 text-white"
+                className="rounded-full bg-primary hover:bg-primary/90 text-white px-6"
                 data-testid="button-start-quiz-prompt"
               >
                 Retake Vibe Quiz ✨
               </Button>
-              <div className="rounded-full px-4 py-2 text-sm font-semibold border bg-white/80 shadow-sm whitespace-nowrap" style={{ borderColor: isDark ? "rgba(255,255,255,0.18)" : "rgba(244,168,192,0.35)", color: isDark ? "#F5E6C8" : "#7D2547" }}>
-                Goal Completion Rate: 92%
+              <div className="rounded-full px-4 py-2 text-sm font-bold border-2 bg-white/95 shadow-md whitespace-nowrap text-center" style={{ borderColor: isDark ? "rgba(255,255,255,0.35)" : "rgba(244,168,192,0.55)", color: isDark ? "#F5E6C8" : "#7D2547" }}>
+                <span className="block text-[11px] uppercase tracking-[0.2em] opacity-70">Girls hit goals here</span>
+                <span className="block text-lg">92% goal completion</span>
               </div>
             </div>
           </motion.div>

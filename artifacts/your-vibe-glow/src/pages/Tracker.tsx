@@ -208,17 +208,15 @@ function HeartCard({
               {habit.name}
             </span>
 
-            {habit.custom && (
-              <button
-                type="button"
-                onClick={() => onRemove(habit.id)}
-                className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-full"
-                style={{ color: subtext }}
-                aria-label={`Delete goal ${habit.name}`}
-              >
-                <X size={14} />
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => onRemove(habit.id)}
+              className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-full"
+              style={{ color: subtext }}
+              aria-label={`Delete goal ${habit.name}`}
+            >
+              <X size={14} />
+            </button>
 
             {habit.completed && (
               <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-base">✨</motion.span>

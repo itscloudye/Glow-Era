@@ -40,11 +40,11 @@ const VIBE_THEMES: Record<string, {
   "Dark Feminine": {
     bg: "",
     card: "border shadow-sm",
-    accent: "bg-[#5A1030]/10",
-    text: "text-[#2A0616]",
-    subtext: "text-[#7D3055]",
+    accent: "bg-[#800020]/10",
+    text: "text-[#1A0008]",
+    subtext: "text-[#6B1020]",
     suggestionCard: "dark-fem-card",
-    border: "border-[#9B2555]/30",
+    border: "border-[#800020]/30",
   },
   "Soft Glow": {
     bg: "",
@@ -69,7 +69,7 @@ const VIBE_THEMES: Record<string, {
 const VIBE_BG_STYLE: Record<string, React.CSSProperties> = {
   "": { background: "#ffffff" },
   "Clean Girl": { background: "linear-gradient(150deg, #FDF6EC 0%, #F5EBE0 40%, #EDD9BE 100%)" },
-  "Dark Feminine": { background: "linear-gradient(150deg, #2A0616 0%, #3A0A1E 35%, #5A1030 70%, #9B2555 100%)" },
+  "Dark Feminine": { background: "linear-gradient(150deg, #1A0008 0%, #2D0010 35%, #4D0018 70%, #800020 100%)" },
   "Soft Glow": { background: "linear-gradient(150deg, #FFF5F8 0%, #FDE8EF 40%, #F8C8D4 100%)" },
   "Balanced Muse": { background: "linear-gradient(150deg, #F8F5FF 0%, #EDE8F5 40%, #DDD0F0 100%)" },
 };

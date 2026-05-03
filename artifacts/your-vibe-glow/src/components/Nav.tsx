@@ -12,7 +12,7 @@ export function Nav() {
   const isDark = vibeResult === "Dark Feminine";
 
   const navBg = isDark
-    ? "bg-[#2A0616]/80 border-b border-white/10 backdrop-blur-md"
+    ? "bg-[#2D0010]/85 border-b border-white/10 backdrop-blur-md"
     : "glass-card border-b border-border/40";
 
   const textColor = isDark ? "text-[#F5E6C8]" : "text-foreground";
@@ -70,7 +70,7 @@ export function Nav() {
               onClick={() => setIsOpen(false)}
               className={`py-3 px-4 text-base font-medium rounded-md mb-1 transition-colors ${
                 location === link.href
-                  ? isDark ? "bg-[#9B2555]/30 text-[#F5E6C8]" : "bg-primary/10 text-primary"
+                  ? isDark ? "bg-[#800020]/40 text-[#F5E6C8]" : "bg-primary/10 text-primary"
                   : isDark ? "text-[#D4A0B5] hover:bg-white/5" : "hover:bg-muted text-foreground"
               }`}
             >

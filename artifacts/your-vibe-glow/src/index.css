@@ -174,9 +174,9 @@
   }
 }
 
-.dark-fem-card { background: linear-gradient(135deg, #6D1A36 0%, #9B2555 40%, #C4527A 70%, #E8809F 100%); color: #FDF0F4; }
+.dark-fem-card { background: linear-gradient(135deg, #4D0018 0%, #800020 40%, #A03040 70%, #C4607A 100%); color: #FDF0F4; }
 .soft-girl-card { background: linear-gradient(135deg, #E8809F 0%, #F4A8C0 40%, #F8C8D4 70%, #FDE8EF 100%); color: #6D1A36; }
-.combined-bg { background: linear-gradient(135deg, #3A0A1E 0%, #5A1030 25%, #9B2555 55%, #E8809F 80%, #FDE8EF 100%); }
+.combined-bg { background: linear-gradient(135deg, #2D0010 0%, #4D0018 25%, #800020 55%, #E8809F 80%, #FDE8EF 100%); }
 .glass-card { background: rgba(255, 235, 242, 0.55); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.75); }
 .gold-glow { box-shadow: 0 0 20px rgba(201,168,76,0.4), 0 0 40px rgba(201,168,76,0.15); }
 .pink-glow { box-shadow: 0 0 24px rgba(196,82,122,0.5), 0 0 48px rgba(248,200,212,0.3); }

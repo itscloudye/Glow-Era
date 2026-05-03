@@ -39,7 +39,7 @@ export function Footer() {
   const isDark = vibeResult === "Dark Feminine";
 
   const bg = isDark
-    ? "bg-[#1A0310] border-t border-white/10"
+    ? "bg-[#1A0008] border-t border-white/10"
     : "bg-white border-t border-border/40";
   const headingColor = isDark ? "text-[#F5E6C8]" : "text-foreground";
   const textColor = isDark ? "text-[#D4A0B5]" : "text-muted-foreground";

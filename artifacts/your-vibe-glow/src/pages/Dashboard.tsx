@@ -100,7 +100,7 @@ const SUGGESTIONS: Record<string, string[]> = {
 };
 
 export default function Dashboard() {
-  const [vibeResult] = useLocalStorage("vibeResult", "");
+  const [vibeResult, setVibeResult] = useLocalStorage("vibeResult", "");
   const [streak] = useLocalStorage("streak", 3);
   const [glowLevel] = useLocalStorage("glowLevel", 42);
   const [todayMood] = useLocalStorage("todayMood", "✨");
@@ -125,11 +125,15 @@ export default function Dashboard() {
 
   useEffect(() => {
     const handleVibeUpdate = (event: Event) => {
+      const customEvent = event as CustomEvent<string>;
+      if (customEvent.detail) {
+        setVibeResult(customEvent.detail);
+      }
       setQuizOpen(false);
     };
     window.addEventListener("glow-vibe-updated", handleVibeUpdate);
     return () => window.removeEventListener("glow-vibe-updated", handleVibeUpdate);
-  }, []);
+  }, [setVibeResult]);
 
   useEffect(() => {
     const handleStorageUpdate = (event: StorageEvent) => {

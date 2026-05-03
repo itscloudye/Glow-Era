@@ -267,9 +267,13 @@ export default function Dashboard() {
               >
                 Retake Vibe Quiz ✨
               </Button>
-              <div className="rounded-full px-4 py-2 text-sm font-bold border-2 bg-white/95 shadow-md whitespace-nowrap text-center" style={{ borderColor: isDark ? "rgba(255,255,255,0.35)" : "rgba(244,168,192,0.55)", color: isDark ? "#F5E6C8" : "#7D2547" }}>
-                <span className="block text-[11px] uppercase tracking-[0.2em] opacity-70">Girls hit goals here</span>
-                <span className="block text-lg">92% goal completion</span>
+              <div className="relative w-24 h-24 rounded-full bg-white/95 shadow-md border-2 flex items-center justify-center" style={{ borderColor: isDark ? "rgba(255,255,255,0.35)" : "rgba(244,168,192,0.55)" }}>
+                <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(${isDark ? "#C9A84C" : "#9B2555"} 0 331.2deg, rgba(0,0,0,0.08) 331.2deg 360deg)` }} />
+                <div className="absolute inset-[7px] rounded-full bg-white/95" />
+                <div className="relative z-10 text-center leading-none" style={{ color: isDark ? "#F5E6C8" : "#7D2547" }}>
+                  <div className="text-[10px] uppercase tracking-[0.18em] opacity-70">Goals</div>
+                  <div className="text-xl font-bold">92%</div>
+                </div>
               </div>
             </div>
           </motion.div>

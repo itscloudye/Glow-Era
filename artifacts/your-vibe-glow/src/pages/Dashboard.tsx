@@ -148,26 +148,14 @@ export default function Dashboard() {
         <header className="mb-8 flex flex-col gap-4 relative overflow-hidden rounded-[2rem] px-5 py-5">
           <div className="absolute inset-0 -z-10 opacity-70 bg-[linear-gradient(120deg,rgba(244,168,192,0.22),rgba(255,255,255,0.04),rgba(201,168,76,0.16))] bg-[length:200%_200%] animate-[shimmer_8s_linear_infinite]" />
           <div className="w-full relative">
-            <Dialog>
-              <DialogTrigger asChild>
-                <button
-                  type="button"
-                  className="absolute right-12 top-0 h-10 w-10 rounded-full flex items-center justify-center transition-all hover:scale-105"
-                  style={{ background: isDark ? "rgba(255,255,255,0.1)" : "rgba(244,168,192,0.22)", color: isDark ? "#F5E6C8" : "#7D2547" }}
-                  aria-label="My Account"
-                >
-                  <CircleUserRound className="h-5 w-5" />
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-sm rounded-3xl border-0" style={{ background: isDark ? "#2D0010" : "#fff7fb" }}>
-                <DialogHeader>
-                  <DialogTitle className={isDark ? "text-[#F5E6C8]" : "text-[#7D2547]"}>My Account</DialogTitle>
-                  <DialogDescription className={isDark ? "text-[#F0D0DC]" : "text-[#6D1A36]"}>
-                    Head to the Account page to save your email and password so your info stays on this device.
-                  </DialogDescription>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
+            <Link
+              href="/account"
+              className="absolute right-12 top-0 h-10 w-10 rounded-full flex items-center justify-center transition-all hover:scale-105"
+              style={{ background: isDark ? "rgba(255,255,255,0.1)" : "rgba(244,168,192,0.22)", color: isDark ? "#F5E6C8" : "#7D2547" }}
+              aria-label="My Account"
+            >
+              <CircleUserRound className="h-5 w-5" />
+            </Link>
             <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
               <DialogTrigger asChild>
                 <button

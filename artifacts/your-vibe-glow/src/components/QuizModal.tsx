@@ -105,9 +105,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
       setVibeResult(finalResult);
       setResult(finalResult);
       window.dispatchEvent(new CustomEvent("glow-vibe-updated", { detail: finalResult }));
-      setTimeout(() => {
-        setShowResult(true);
-      }, 280);
+      setShowResult(true);
     }
   };
 

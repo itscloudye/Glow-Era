@@ -124,7 +124,12 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    const handleVibeUpdate = () => {
+    const handleVibeUpdate = (event: Event) => {
+      const customEvent = event as CustomEvent<string>;
+      const nextVibe = customEvent.detail;
+      if (nextVibe) {
+        setVibeResult(nextVibe);
+      }
       setQuizOpen(false);
     };
     window.addEventListener("glow-vibe-updated", handleVibeUpdate);

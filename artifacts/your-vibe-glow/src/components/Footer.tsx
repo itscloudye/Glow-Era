@@ -49,12 +49,12 @@ export function Footer() {
 
   return (
     <footer className={`w-full ${bg}`}>
-      <div className="container mx-auto px-6 py-12 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <div className="container mx-auto px-6 py-10 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
 
           {/* Brand column */}
           <div className="space-y-4">
-            <h3 className={`text-2xl font-serif font-bold shimmer-text`}>Glow Era ✨</h3>
+            <h3 className={`text-xl font-serif font-bold shimmer-text`}>Glow Era ✨</h3>
             <p className={`text-sm leading-relaxed ${textColor}`}>
               Your personal glow-up companion. Built for girls who are in their growth era and refuse to dim their shine.
             </p>
@@ -157,7 +157,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className={`pt-6 border-t ${divider} flex flex-col sm:flex-row items-center justify-between gap-3`}>
+        <div className={`pt-5 border-t ${divider} flex flex-col sm:flex-row items-center justify-between gap-2`}>
           <p className={`text-xs ${textColor}`}>
             © {new Date().getFullYear()} Glow Era. Made with{" "}
             <span style={{ color: accentColor }}>
@@ -165,7 +165,7 @@ export function Footer() {
             </span>{" "}
             for girls in their glow era.
           </p>
-          <p className={`text-xs ${textColor} opacity-60`}>
+          <p className={`text-[10px] ${textColor} opacity-60`}>
             All data stays on your device. Your glow, your privacy. ✨
           </p>
         </div>

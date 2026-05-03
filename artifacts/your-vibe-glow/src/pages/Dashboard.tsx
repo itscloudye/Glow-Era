@@ -145,7 +145,8 @@ export default function Dashboard() {
       <div className="container mx-auto p-4 md:p-8 max-w-5xl">
 
         {/* Header */}
-        <header className="mb-8 flex flex-col gap-4">
+        <header className="mb-8 flex flex-col gap-4 relative overflow-hidden rounded-[2rem] px-5 py-5">
+          <div className="absolute inset-0 -z-10 opacity-70 bg-[linear-gradient(120deg,rgba(244,168,192,0.22),rgba(255,255,255,0.04),rgba(201,168,76,0.16))] bg-[length:200%_200%] animate-[shimmer_8s_linear_infinite]" />
           <div className="w-full relative">
             <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
               <DialogTrigger asChild>
@@ -443,7 +444,7 @@ export default function Dashboard() {
 
       </div>
 
-      <div className="pb-10 text-center text-xs tracking-[0.35em] uppercase footer-glow">
+      <div className="pb-8 text-center text-[10px] tracking-[0.28em] uppercase footer-glow opacity-85">
         1% Better Every Day
       </div>
 

@@ -263,7 +263,9 @@ export default function Moodboard() {
                   initial={{ opacity: 0, scale: 0.9, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ delay: idx < 8 ? idx * 0.04 : 0, type: "spring", stiffness: 260, damping: 22 }}
-                  className="break-inside-avoid mb-4 relative group rounded-[28px] overflow-hidden cursor-pointer bg-white"
+                  className={`break-inside-avoid mb-4 relative group rounded-[30px] overflow-hidden cursor-pointer bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(0,0,0,0.14)] ${
+                    idx % 5 === 0 ? "min-h-[340px]" : idx % 5 === 1 ? "min-h-[280px]" : idx % 5 === 2 ? "min-h-[380px]" : idx % 5 === 3 ? "min-h-[300px]" : "min-h-[260px]"
+                  }`}
                   onMouseEnter={() => setHoveredId(photo.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   style={{
@@ -277,7 +279,7 @@ export default function Moodboard() {
                   <img
                     src={photo.src}
                     alt="moodboard photo"
-                    className="w-full object-cover block"
+                    className="w-full h-full object-cover block"
                     style={{ borderRadius: "28px" }}
                     draggable={false}
                   />

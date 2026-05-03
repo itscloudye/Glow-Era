@@ -36,7 +36,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <div className="min-h-[100dvh] flex flex-col text-foreground overflow-x-hidden">
             <Nav />
-            <main className="flex-grow flex flex-col">
+            <main className="flex-grow flex flex-col page-transition">
               <Router />
             </main>
             <Footer />

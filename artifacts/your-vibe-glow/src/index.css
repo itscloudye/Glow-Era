@@ -202,3 +202,9 @@
 .animate-float { animation: float 3s ease-in-out infinite; }
 .shimmer-text { background: linear-gradient(90deg, #C9A84C, #F4A8C0, #9B2555, #F4A8C0, #C9A84C); background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite; }
 .footer-glow { animation: shimmer 5s linear infinite; background: linear-gradient(90deg, #C9A84C, #F4A8C0, #9B2555, #F4A8C0, #C9A84C); background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.page-transition { animation: pageFade 260ms ease-out; }
+
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

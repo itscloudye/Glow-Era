@@ -160,6 +160,9 @@ export default function Moodboard() {
             </div>
 
             <div className="flex items-center gap-3">
+              <div className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.25em]" style={{ background: `${t.accent}12`, color: t.subtext }}>
+                saved locally
+              </div>
               <button
                 onClick={() => inputRef.current?.click()}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold transition-all hover:opacity-85 shrink-0"
@@ -309,7 +312,7 @@ export default function Moodboard() {
 
                         {/* Compliment + caption at bottom */}
                         <div className="space-y-1">
-                          <p className="text-white text-xs font-semibold drop-shadow-sm">
+                          <p className="text-white text-xs font-semibold drop-shadow-sm bg-black/25 px-2 py-1 rounded-full inline-block">
                             {photo.compliment}
                           </p>
                           <input

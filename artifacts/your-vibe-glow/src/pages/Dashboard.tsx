@@ -296,10 +296,11 @@ export default function Dashboard() {
             <motion.div
               key={i}
               whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.99 }}
               className={`p-4 rounded-2xl flex flex-col gap-2 ${
                 isDark
-                  ? "bg-white/10 border border-white/15 backdrop-blur-sm"
-                  : `${theme.card} ${theme.border}`
+                  ? "bg-white/10 border border-white/15 backdrop-blur-sm shadow-sm hover:shadow-lg"
+                  : `${theme.card} ${theme.border} shadow-sm hover:shadow-lg`
               }`}
             >
               <div className={`flex items-center gap-2 ${card.iconColor}`}>
@@ -322,7 +323,7 @@ export default function Dashboard() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               className={`p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
-                isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15" : `bg-card ${theme.border} border hover:border-primary/40`
+                isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15 shadow-sm hover:shadow-lg" : `bg-card ${theme.border} border hover:border-primary/40 shadow-sm hover:shadow-lg`
               }`}
               data-testid="link-tracker"
             >
@@ -342,7 +343,7 @@ export default function Dashboard() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               className={`p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
-                isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15" : `bg-card ${theme.border} border hover:border-primary/40`
+                isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15 shadow-sm hover:shadow-lg" : `bg-card ${theme.border} border hover:border-primary/40 shadow-sm hover:shadow-lg`
               }`}
               data-testid="link-checkin"
             >
@@ -367,7 +368,7 @@ export default function Dashboard() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               className={`p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
-                isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15" : `bg-card ${theme.border} border hover:border-primary/40`
+                isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15 shadow-sm hover:shadow-lg" : `bg-card ${theme.border} border hover:border-primary/40 shadow-sm hover:shadow-lg`
               }`}
               data-testid="link-journal"
             >
@@ -389,8 +390,8 @@ export default function Dashboard() {
         <Link href="/moodboard">
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className={`mb-8 p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
-              isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15" : `bg-card ${theme.border} border hover:border-primary/40`
+              className={`mb-8 p-6 rounded-2xl flex items-center gap-5 cursor-pointer transition-all ${
+                isDark ? "bg-white/10 border border-white/15 backdrop-blur-sm hover:bg-white/15 shadow-sm hover:shadow-lg" : `bg-card ${theme.border} border hover:border-primary/40 shadow-sm hover:shadow-lg`
             }`}
             data-testid="link-moodboard"
           >
@@ -403,7 +404,7 @@ export default function Dashboard() {
               <div className="absolute -right-1 top-1 w-3.5 h-3.5 rounded-full bg-[#B89AE8] border border-white/70" />
             </div>
             <div className="flex-1">
-              <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>ypur pintrest board</h3>
+              <h3 className={`font-bold text-lg ${isDark ? "text-white" : theme.text}`}>Your pintrest board</h3>
               <p className={`text-sm ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>build your inspo board with photos you love</p>
               <p className={`text-xs mt-1 opacity-70 ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>tap to open your board</p>
             </div>

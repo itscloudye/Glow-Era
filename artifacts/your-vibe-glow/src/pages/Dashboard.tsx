@@ -129,7 +129,7 @@ export default function Dashboard() {
             </h1>
             <p className={`font-medium text-lg ${isDark ? "text-[#D4A0B5]" : theme.subtext}`}>{today}</p>
             <div
-              className="mt-4 w-full rounded-3xl px-5 py-4 backdrop-blur-md"
+              className="mt-4 w-full px-5 py-4 backdrop-blur-md"
               style={{ background: introBg }}
             >
               <p className="text-sm md:text-base leading-relaxed text-[#F5E6C8]/90">

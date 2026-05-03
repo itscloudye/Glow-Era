@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Italianno&family=DM+Serif+Text&family=Inter:wght@400;500&family=Dancing+Script:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=DM+Serif+Text&family=Inter:wght@400;500&family=Dancing+Script:wght@500&family=EB+Garamond:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -166,7 +166,10 @@
   }
 
   body {
-    @apply font-serif antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  input, textarea, select {
+    font-family: 'EB Garamond', serif;
   }
   
   h1, h2, h3, h4, h5, h6 {

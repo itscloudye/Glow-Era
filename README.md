@@ -14,6 +14,8 @@ Start with the vibe quiz to discover a profile such as Soft Glow, Clean Girl, Da
 - **Moodboard:** Add inspiration photos, captions, and a personal board title.
 - **Personalized suggestions:** Explore ideas based on your selected vibe.
 
+Your Vibe Glow is for anyone who wants a more expressive way to keep track of moods, routines, and ideas. Its aim is to make self-care feel less like a checklist and more like a personal practice you can shape to fit yourself.
+
 ## Run locally
 
 This project uses Node.js 24 and pnpm.

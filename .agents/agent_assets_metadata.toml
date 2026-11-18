@@ -42,3 +42,17 @@ mtime_ms = 1794989869445
 storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:e5f14e6f-c256-47dd-ae15-f8f19015bdb3/9daae3d3-869a-4f02-8b49-1d28d0f477b5/6ec90617-f632-4f28-b37e-453fbdcb94c0"
 storage_version_token = "1794989883780579"
 content_type = "application/octet-stream"
+
+[[outputs]]
+id = "GMPGJoOiAqHXKVoPtfISN"
+uri = "file://generated-artifacts/your-vibe-glow-github-pages.zip"
+type = "unspecified"
+title = "Your Vibe Glow — GitHub Pages setup"
+description = "Updated project ZIP with a GitHub Pages deployment workflow, README instructions, and the Vite path fixes. Includes 208 project files; excludes dependencies and private workspace files."
+logical_id = "df6bd8a9-3486-4f00-8ba1-285419112f9f"
+content_hash = "sha256:32a6b9a7e657972e858acb02e23b5edb32f6650e66919b394cfe43cace54e164"
+size = 1075441
+mtime_ms = 1794992597306
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:e5f14e6f-c256-47dd-ae15-f8f19015bdb3/df6bd8a9-3486-4f00-8ba1-285419112f9f/4bbef5a3-56a4-4ae2-bf01-d8acd7558e1b"
+storage_version_token = "1794992614428371"
+content_type = "application/octet-stream"

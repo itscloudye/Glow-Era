@@ -112,18 +112,6 @@ export default function Dashboard() {
   const [helpOpen, setHelpOpen] = useState(false);
 
   useEffect(() => {
-    if (window.location.pathname === "/") {
-      localStorage.removeItem("vibeResult");
-      localStorage.removeItem("streak");
-      localStorage.removeItem("glowLevel");
-      localStorage.removeItem("todayMood");
-      localStorage.removeItem("journal_cover");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("hasSeenQuizAlert");
-    }
-  }, []);
-
-  useEffect(() => {
     const handleVibeUpdate = (event: Event) => {
       const customEvent = event as CustomEvent<string>;
       if (customEvent.detail) {

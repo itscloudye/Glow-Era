@@ -6,21 +6,39 @@ id = "yWYafyqMJqd-0lE2a7Cqj"
 uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-1.jpg"
 type = "image"
 title = "pink flat lay fashion accessories"
+logical_id = "048982ea-51f8-40ae-9587-b631292c2fe4"
 
 [[outputs]]
 id = "piv4Y9J0IMZ-tFJrBJ4_S"
 uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-2.jpg"
 type = "image"
 title = "aesthetic skincare products"
+logical_id = "d576b0bc-05d1-42af-9ff0-48df1a12c243"
 
 [[outputs]]
 id = "loaKYeQinzjPsj4tHuDSu"
 uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-3.jpg"
 type = "image"
 title = "pink flowers aesthetic"
+logical_id = "a673fb53-1a59-4b38-837f-5dd57c9f0bca"
 
 [[outputs]]
 id = "UhVKDvv8tS36RyuJcfe81"
 uri = "file://artifacts/your-vibe-glow/public/moodboard-starter-4.jpg"
 type = "image"
 title = "girly bedroom decor aesthetic"
+logical_id = "a9fcd481-366b-4af8-b553-c67c56e67a20"
+
+[[outputs]]
+id = "36ckWaumXYT4XsyzW-sBD"
+uri = "file://generated-artifacts/your-vibe-glow-source.zip"
+type = "unspecified"
+title = "Your Vibe Glow project files"
+description = "Downloadable ZIP with the 206 tracked project source and configuration files, excluding dependencies and private workspace data."
+logical_id = "9daae3d3-869a-4f02-8b49-1d28d0f477b5"
+content_hash = "sha256:24930eabe0c2bf7bd80d6ee419b810fa7e19336d5605ac546f466b1e65d891d3"
+size = 1073508
+mtime_ms = 1794989869445
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:e5f14e6f-c256-47dd-ae15-f8f19015bdb3/9daae3d3-869a-4f02-8b49-1d28d0f477b5/6ec90617-f632-4f28-b37e-453fbdcb94c0"
+storage_version_token = "1794989883780579"
+content_type = "application/octet-stream"

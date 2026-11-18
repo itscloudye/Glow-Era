@@ -1,5 +1,6 @@
 name: Deploy Your Vibe Glow to GitHub Pages
 
+# In repository Settings → Pages, set the publishing source to GitHub Actions.
 on:
   push:
     branches:
@@ -40,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Set Pages base path
+      - name: Set Vite base path
         id: base
         shell: bash
         run: |
@@ -54,10 +55,27 @@ jobs:
       - name: Build website
         run: |
           pnpm --filter @workspace/your-vibe-glow run build
-          cp artifacts/your-vibe-glow/dist/public/index.html artifacts/your-vibe-glow/dist/public/404.html
+          site_dir="artifacts/your-vibe-glow/dist/public"
+          cp "$site_dir/index.html" "$site_dir/404.html"
+          touch "$site_dir/.nojekyll"
         env:
           PORT: "18742"
           BASE_PATH: ${{ steps.base.outputs.path }}
+
+      - name: Verify production site files
+        shell: bash
+        env:
+          BASE_PATH: ${{ steps.base.outputs.path }}
+        run: |
+          site_dir="artifacts/your-vibe-glow/dist/public"
+          test -s "$site_dir/index.html"
+          test -s "$site_dir/404.html"
+          test -s "$site_dir/favicon.svg"
+          test -d "$site_dir/assets"
+          find "$site_dir/assets" -type f -name '*.js' -print -quit | grep -q .
+          find "$site_dir/assets" -type f -name '*.css' -print -quit | grep -q .
+          grep -Fq '<div id="root"></div>' "$site_dir/index.html"
+          grep -Fq "${BASE_PATH}assets/" "$site_dir/index.html"
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v3

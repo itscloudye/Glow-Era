@@ -4,6 +4,7 @@ Your Vibe Glow is a self-care and mood-tracking website designed to make everyda
 
 Start with the vibe quiz to discover a profile such as Soft Glow, Clean Girl, Dark Feminine, or Balanced Muse. Your result shapes the dashboard’s look and helps guide the suggestions you see. From there, you can use the app to build small routines and record how you’re feeling.
 
+You can make a profile and login every time with saved information.
 ## Features
 
 - **Vibe quiz:** Take a short quiz and discover your current vibe.
@@ -19,7 +20,7 @@ Your Vibe Glow is for anyone who wants a more expressive way to keep track of mo
 ## Run locally
 
 This project uses Node.js 24 and pnpm.
-
+Typescript
 ```bash
 pnpm install
 pnpm --filter @workspace/your-vibe-glow run dev
